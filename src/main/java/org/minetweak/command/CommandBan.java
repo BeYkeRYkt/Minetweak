@@ -4,6 +4,7 @@ import net.minecraft.src.EnumChatFormatting;
 import org.minetweak.Minetweak;
 import org.minetweak.Server;
 import org.minetweak.entity.Player;
+import org.minetweak.util.StringUtils;
 
 public class CommandBan extends CommandExecutor {
 
@@ -17,7 +18,7 @@ public class CommandBan extends CommandExecutor {
         if (args.length == 1) {
             targetPlayer.banPlayer();
         } else if (args.length >= 2) {
-            args = Server.dropFirstString(args);
+            args = StringUtils.dropFirstString(args);
             String reason = mergeArgs(args);
             targetPlayer.banPlayer(reason);
         }

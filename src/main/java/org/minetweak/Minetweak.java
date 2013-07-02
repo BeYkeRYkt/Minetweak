@@ -2,9 +2,13 @@ package org.minetweak;
 
 import com.google.common.eventbus.EventBus;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.src.Block;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
 import org.minetweak.command.*;
 import org.minetweak.entity.Player;
 import org.minetweak.plugins.PluginLoader;
+import org.minetweak.recipe.RecipeManager;
 
 import java.util.HashMap;
 
@@ -68,6 +72,7 @@ public class Minetweak {
         registerCommand("deop", new CommandDeop());
         registerCommand("kill", new CommandKill());
         registerCommand("players", new CommandListPlayers());
+        registerListener(RecipeManager.getInstance());
 
         PluginLoader.initialize();
 
@@ -161,8 +166,7 @@ public class Minetweak {
      * @return Instance of player
      */
     public static Player getPlayerByName(String playerName) {
-        if (players.containsKey(playerName)) return players.get(playerName);
-        return null;
+       return players.get(playerName);
     }
 
     /**
@@ -202,11 +206,11 @@ public class Minetweak {
     }
 
     /**
-     * Registers a Guava Event Listener
-     * @param clazz the listener class
+     .* Registers a Guava Event Listener
+     * @param object the instance of the listener
      */
-    public static void registerListener(Class clazz) {
-        eventBus.register(clazz);
+    public static void registerListener(Object object) {
+        eventBus.register(object);
     }
 
     /**

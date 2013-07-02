@@ -21,15 +21,15 @@ public abstract class ServerConfigurationManager
     private final MinecraftServer mcServer;
 
     /** A list of player entities that exist on this server. */
-    public final List playerEntityList = new ArrayList();
+    public final List<EntityPlayerMP> playerEntityList = new ArrayList<EntityPlayerMP>();
     private final BanList bannedPlayers = new BanList(new File("banned-players.txt"));
     private final BanList bannedIPs = new BanList(new File("banned-ips.txt"));
 
     /** A set containing the OPs. */
-    private Set ops = new HashSet();
+    private Set<String> ops = new HashSet<String>();
 
     /** The Set of all whitelisted players. */
-    private Set whiteListedPlayers = new HashSet();
+    private Set<String> whiteListedPlayers = new HashSet<String>();
 
     /** Reference to the PlayerNBTManager object. */
     private IPlayerFileData playerNBTManagerObj;
@@ -122,7 +122,7 @@ public abstract class ServerConfigurationManager
 
     protected void func_96456_a(ServerScoreboard par1ServerScoreboard, EntityPlayerMP par2EntityPlayerMP)
     {
-        HashSet var3 = new HashSet();
+        HashSet<ScoreObjective> var3 = new HashSet<ScoreObjective>();
         Iterator var4 = par1ServerScoreboard.func_96525_g().iterator();
 
         while (var4.hasNext())
@@ -138,11 +138,9 @@ public abstract class ServerConfigurationManager
             if (var10 != null && !var3.contains(var10))
             {
                 List var6 = par1ServerScoreboard.func_96550_d(var10);
-                Iterator var7 = var6.iterator();
 
-                while (var7.hasNext())
-                {
-                    Packet var8 = (Packet)var7.next();
+                for (Object aVar6 : var6) {
+                    Packet var8 = (Packet) aVar6;
                     par2EntityPlayerMP.playerNetServerHandler.sendPacket(var8);
                 }
 
@@ -220,7 +218,7 @@ public abstract class ServerConfigurationManager
 
         for (int var3 = 0; var3 < this.playerEntityList.size(); ++var3)
         {
-            EntityPlayerMP var4 = (EntityPlayerMP)this.playerEntityList.get(var3);
+            EntityPlayerMP var4 = this.playerEntityList.get(var3);
             par1EntityPlayerMP.playerNetServerHandler.sendPacket(new Packet201PlayerInfo(var4.username, true, var4.ping));
         }
     }
@@ -304,12 +302,12 @@ public abstract class ServerConfigurationManager
      */
     public EntityPlayerMP createPlayerForUser(String par1Str)
     {
-        ArrayList var2 = new ArrayList();
+        ArrayList<EntityPlayerMP> var2 = new ArrayList<EntityPlayerMP>();
         EntityPlayerMP var4;
 
         for (int var3 = 0; var3 < this.playerEntityList.size(); ++var3)
         {
-            var4 = (EntityPlayerMP)this.playerEntityList.get(var3);
+            var4 = this.playerEntityList.get(var3);
 
             if (var4.username.equalsIgnoreCase(par1Str))
             {
@@ -317,11 +315,8 @@ public abstract class ServerConfigurationManager
             }
         }
 
-        Iterator var5 = var2.iterator();
-
-        while (var5.hasNext())
-        {
-            var4 = (EntityPlayerMP)var5.next();
+        for (EntityPlayerMP aVar2 : var2) {
+            var4 = aVar2;
             var4.playerNetServerHandler.kickPlayer("You logged in from another location");
         }
 
@@ -528,7 +523,7 @@ public abstract class ServerConfigurationManager
 
         if (this.playerPingIndex < this.playerEntityList.size())
         {
-            EntityPlayerMP var1 = (EntityPlayerMP)this.playerEntityList.get(this.playerPingIndex);
+            EntityPlayerMP var1 = this.playerEntityList.get(this.playerPingIndex);
             this.sendPacketToAllPlayers(new Packet201PlayerInfo(var1.username, true, var1.ping));
         }
     }
@@ -538,9 +533,8 @@ public abstract class ServerConfigurationManager
      */
     public void sendPacketToAllPlayers(Packet par1Packet)
     {
-        for (int var2 = 0; var2 < this.playerEntityList.size(); ++var2)
-        {
-            ((EntityPlayerMP)this.playerEntityList.get(var2)).playerNetServerHandler.sendPacket(par1Packet);
+        for (EntityPlayerMP aPlayerEntityList : this.playerEntityList) {
+            aPlayerEntityList.playerNetServerHandler.sendPacket(par1Packet);
         }
     }
 
@@ -549,12 +543,8 @@ public abstract class ServerConfigurationManager
      */
     public void sendPacketToAllPlayersInDimension(Packet par1Packet, int par2)
     {
-        for (int var3 = 0; var3 < this.playerEntityList.size(); ++var3)
-        {
-            EntityPlayerMP var4 = (EntityPlayerMP)this.playerEntityList.get(var3);
-
-            if (var4.dimension == par2)
-            {
+        for (EntityPlayerMP var4 : this.playerEntityList) {
+            if (var4.dimension == par2) {
                 var4.playerNetServerHandler.sendPacket(par1Packet);
             }
         }
@@ -574,7 +564,7 @@ public abstract class ServerConfigurationManager
                 var1 = var1 + ", ";
             }
 
-            var1 = var1 + ((EntityPlayerMP)this.playerEntityList.get(var2)).username;
+            var1 = var1 + (this.playerEntityList.get(var2)).username;
         }
 
         return var1;
@@ -589,7 +579,7 @@ public abstract class ServerConfigurationManager
 
         for (int var2 = 0; var2 < this.playerEntityList.size(); ++var2)
         {
-            var1[var2] = ((EntityPlayerMP)this.playerEntityList.get(var2)).username;
+            var1[var2] = (this.playerEntityList.get(var2)).username;
         }
 
         return var1;
@@ -653,7 +643,7 @@ public abstract class ServerConfigurationManager
      */
     public EntityPlayerMP getPlayerEntity(String par1Str)
     {
-        Iterator var2 = this.playerEntityList.iterator();
+        Iterator<EntityPlayerMP> var2 = this.playerEntityList.iterator();
         EntityPlayerMP var3;
 
         do
@@ -663,7 +653,7 @@ public abstract class ServerConfigurationManager
                 return null;
             }
 
-            var3 = (EntityPlayerMP)var2.next();
+            var3 = var2.next();
         }
         while (!var3.username.equalsIgnoreCase(par1Str));
 
@@ -689,7 +679,7 @@ public abstract class ServerConfigurationManager
 
             for (int var15 = 0; var15 < this.playerEntityList.size(); ++var15)
             {
-                EntityPlayerMP var16 = (EntityPlayerMP)this.playerEntityList.get(var15);
+                EntityPlayerMP var16 = this.playerEntityList.get(var15);
                 boolean var17;
 
                 if (par9Str != null)
@@ -826,18 +816,13 @@ public abstract class ServerConfigurationManager
      */
     public void sendToAllNearExcept(EntityPlayer par1EntityPlayer, double par2, double par4, double par6, double par8, int par10, Packet par11Packet)
     {
-        for (int var12 = 0; var12 < this.playerEntityList.size(); ++var12)
-        {
-            EntityPlayerMP var13 = (EntityPlayerMP)this.playerEntityList.get(var12);
-
-            if (var13 != par1EntityPlayer && var13.dimension == par10)
-            {
+        for (EntityPlayerMP var13 : this.playerEntityList) {
+            if (var13 != par1EntityPlayer && var13.dimension == par10) {
                 double var14 = par2 - var13.posX;
                 double var16 = par4 - var13.posY;
                 double var18 = par6 - var13.posZ;
 
-                if (var14 * var14 + var16 * var16 + var18 * var18 < par8 * par8)
-                {
+                if (var14 * var14 + var16 * var16 + var18 * var18 < par8 * par8) {
                     var13.playerNetServerHandler.sendPacket(par11Packet);
                 }
             }
@@ -851,7 +836,7 @@ public abstract class ServerConfigurationManager
     {
         for (int var1 = 0; var1 < this.playerEntityList.size(); ++var1)
         {
-            this.writePlayerData((EntityPlayerMP)this.playerEntityList.get(var1));
+            this.writePlayerData(this.playerEntityList.get(var1));
         }
     }
 
@@ -874,12 +859,12 @@ public abstract class ServerConfigurationManager
     /**
      * Returns the whitelisted players.
      */
-    public Set getWhiteListedPlayers()
+    public Set<String> getWhiteListedPlayers()
     {
         return this.whiteListedPlayers;
     }
 
-    public Set getOps()
+    public Set<String> getOps()
     {
         return this.ops;
     }
@@ -946,14 +931,14 @@ public abstract class ServerConfigurationManager
         this.whiteListEnforced = par1;
     }
 
-    public List getPlayerList(String par1Str)
+    public List<EntityPlayerMP> getPlayerList(String par1Str)
     {
-        ArrayList var2 = new ArrayList();
-        Iterator var3 = this.playerEntityList.iterator();
+        ArrayList<EntityPlayerMP> var2 = new ArrayList<EntityPlayerMP>();
+        Iterator<EntityPlayerMP> var3 = this.playerEntityList.iterator();
 
         while (var3.hasNext())
         {
-            EntityPlayerMP var4 = (EntityPlayerMP)var3.next();
+            EntityPlayerMP var4 = var3.next();
 
             if (var4.getPlayerIP().equals(par1Str))
             {
@@ -1006,7 +991,7 @@ public abstract class ServerConfigurationManager
     {
         while (!this.playerEntityList.isEmpty())
         {
-            ((EntityPlayerMP)this.playerEntityList.get(0)).playerNetServerHandler.kickPlayer("Server closed");
+            (this.playerEntityList.get(0)).playerNetServerHandler.kickPlayer("Server closed");
         }
     }
 

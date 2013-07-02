@@ -77,7 +77,7 @@ public final class ItemStack
         return var1.getItem() != null ? var1 : null;
     }
 
-    private ItemStack()
+    public ItemStack()
     {
         this.stackSize = 0;
         this.itemFrame = null;

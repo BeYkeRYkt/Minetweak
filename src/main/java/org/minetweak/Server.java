@@ -5,6 +5,7 @@ import net.minecraft.src.CommandBase;
 import net.minecraft.src.EntityPlayerMP;
 import org.minetweak.command.Console;
 import org.minetweak.entity.Player;
+import org.minetweak.util.StringUtils;
 
 public class Server {
 
@@ -60,7 +61,7 @@ public class Server {
 
         String[] commandWithArgs = command.split(" ");
         String commandOnly = commandWithArgs[0];
-        String[] args = dropFirstString(commandWithArgs);
+        String[] args = StringUtils.dropFirstString(commandWithArgs);
 
         if (Minetweak.doesCommandExist(commandWithArgs[0])) {
             Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(Minetweak.getPlayerByName(player.getEntityName()), commandOnly, args);
@@ -74,17 +75,11 @@ public class Server {
 
         String[] commandWithArgs = command.split(" ");
         String commandOnly = commandWithArgs[0];
-        String[] args = dropFirstString(commandWithArgs);
+        String[] args = StringUtils.dropFirstString(commandWithArgs);
 
         if (Minetweak.doesCommandExist(commandWithArgs[0])) {
             Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(console, commandOnly, args);
         }
-    }
-
-    public static String[] dropFirstString(String[] par0ArrayOfStr) {
-        String[] var1 = new String[par0ArrayOfStr.length - 1];
-        System.arraycopy(par0ArrayOfStr, 1, var1, 0, par0ArrayOfStr.length - 1);
-        return var1;
     }
 
     public static void opPlayer(String playerUsername) {

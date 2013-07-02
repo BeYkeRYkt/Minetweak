@@ -162,11 +162,6 @@ public class DedicatedServer extends MinecraftServer implements IServer
          */
         Minetweak.setServerDoneLoading();
 
-        /**
-         * Trigger the ServerFinishedStartup event
-         */
-        Minetweak.getEventBus().post(new ServerFinishedStartupEvent());
-
         if (this.settings.getBooleanProperty("enable-query", false))
         {
             this.getLogAgent().func_98233_a("Starting GS4 status listener");
