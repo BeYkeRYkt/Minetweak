@@ -332,7 +332,7 @@ public abstract class EntityAnimal extends EntityAgeable implements IAnimals
 
                 if (var2.stackSize <= 0)
                 {
-                    par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack)null);
+                    par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, null);
                 }
             }
 
@@ -373,6 +373,6 @@ public abstract class EntityAnimal extends EntityAgeable implements IAnimals
      */
     public boolean canMateWith(EntityAnimal par1EntityAnimal)
     {
-        return par1EntityAnimal == this ? false : (par1EntityAnimal.getClass() != this.getClass() ? false : this.isInLove() && par1EntityAnimal.isInLove());
+        return par1EntityAnimal != this && (par1EntityAnimal.getClass() == this.getClass() && this.isInLove() && par1EntityAnimal.isInLove());
     }
 }

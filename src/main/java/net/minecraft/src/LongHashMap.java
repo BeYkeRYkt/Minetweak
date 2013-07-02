@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class LongHashMap
 {
     /** the array of all elements in the hash */

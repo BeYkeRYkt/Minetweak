@@ -49,7 +49,7 @@ public class Chunk
     private boolean isGapLightingUpdated;
 
     /** A Map of ChunkPositions to TileEntities in this chunk */
-    public Map chunkTileEntityMap;
+    public Map<ChunkPosition, TileEntity> chunkTileEntityMap;
 
     /**
      * Array of Lists containing the entities in this Chunk. Each List represents a 16 block subchunk.
@@ -94,7 +94,7 @@ public class Chunk
         this.precipitationHeightMap = new int[256];
         this.updateSkylightColumns = new boolean[256];
         this.isGapLightingUpdated = false;
-        this.chunkTileEntityMap = new HashMap();
+        this.chunkTileEntityMap = new HashMap<ChunkPosition, TileEntity>();
         this.isTerrainPopulated = false;
         this.isModified = false;
         this.hasEntities = false;
@@ -823,7 +823,7 @@ public class Chunk
     public TileEntity getChunkBlockTileEntity(int par1, int par2, int par3)
     {
         ChunkPosition var4 = new ChunkPosition(par1, par2, par3);
-        TileEntity var5 = (TileEntity)this.chunkTileEntityMap.get(var4);
+        TileEntity var5 = this.chunkTileEntityMap.get(var4);
 
         if (var5 == null)
         {
@@ -840,7 +840,7 @@ public class Chunk
                 this.worldObj.setBlockTileEntity(this.xPosition * 16 + par1, par2, this.zPosition * 16 + par3, var5);
             }
 
-            var5 = (TileEntity)this.chunkTileEntityMap.get(var4);
+            var5 = this.chunkTileEntityMap.get(var4);
         }
 
         if (var5 != null && var5.isInvalid())
@@ -885,7 +885,7 @@ public class Chunk
         {
             if (this.chunkTileEntityMap.containsKey(var5))
             {
-                ((TileEntity)this.chunkTileEntityMap.get(var5)).invalidate();
+                (this.chunkTileEntityMap.get(var5)).invalidate();
             }
 
             par4TileEntity.validate();
@@ -902,7 +902,7 @@ public class Chunk
 
         if (this.isChunkLoaded)
         {
-            TileEntity var5 = (TileEntity)this.chunkTileEntityMap.remove(var4);
+            TileEntity var5 = this.chunkTileEntityMap.remove(var4);
 
             if (var5 != null)
             {
@@ -919,9 +919,8 @@ public class Chunk
         this.isChunkLoaded = true;
         this.worldObj.addTileEntity(this.chunkTileEntityMap.values());
 
-        for (int var1 = 0; var1 < this.entityLists.length; ++var1)
-        {
-            this.worldObj.addLoadedEntities(this.entityLists[var1]);
+        for (List entityList : this.entityLists) {
+            this.worldObj.addLoadedEntities(entityList);
         }
     }
 
@@ -931,17 +930,13 @@ public class Chunk
     public void onChunkUnload()
     {
         this.isChunkLoaded = false;
-        Iterator var1 = this.chunkTileEntityMap.values().iterator();
 
-        while (var1.hasNext())
-        {
-            TileEntity var2 = (TileEntity)var1.next();
+        for (TileEntity var2 : this.chunkTileEntityMap.values()) {
             this.worldObj.markTileEntityForDespawn(var2);
         }
 
-        for (int var3 = 0; var3 < this.entityLists.length; ++var3)
-        {
-            this.worldObj.unloadEntities(this.entityLists[var3]);
+        for (List entityList : this.entityLists) {
+            this.worldObj.unloadEntities(entityList);
         }
     }
 
@@ -978,23 +973,18 @@ public class Chunk
         {
             List var8 = this.entityLists[var7];
 
-            for (int var9 = 0; var9 < var8.size(); ++var9)
-            {
-                Entity var10 = (Entity)var8.get(var9);
+            for (Object aVar8 : var8) {
+                Entity var10 = (Entity) aVar8;
 
-                if (var10 != par1Entity && var10.boundingBox.intersectsWith(par2AxisAlignedBB) && (par4IEntitySelector == null || par4IEntitySelector.isEntityApplicable(var10)))
-                {
+                if (var10 != par1Entity && var10.boundingBox.intersectsWith(par2AxisAlignedBB) && (par4IEntitySelector == null || par4IEntitySelector.isEntityApplicable(var10))) {
                     par3List.add(var10);
                     Entity[] var11 = var10.getParts();
 
-                    if (var11 != null)
-                    {
-                        for (int var12 = 0; var12 < var11.length; ++var12)
-                        {
-                            var10 = var11[var12];
+                    if (var11 != null) {
+                        for (Entity aVar11 : var11) {
+                            var10 = aVar11;
 
-                            if (var10 != par1Entity && var10.boundingBox.intersectsWith(par2AxisAlignedBB) && (par4IEntitySelector == null || par4IEntitySelector.isEntityApplicable(var10)))
-                            {
+                            if (var10 != par1Entity && var10.boundingBox.intersectsWith(par2AxisAlignedBB) && (par4IEntitySelector == null || par4IEntitySelector.isEntityApplicable(var10))) {
                                 par3List.add(var10);
                             }
                         }
@@ -1034,12 +1024,10 @@ public class Chunk
         {
             List var8 = this.entityLists[var7];
 
-            for (int var9 = 0; var9 < var8.size(); ++var9)
-            {
-                Entity var10 = (Entity)var8.get(var9);
+            for (Object aVar8 : var8) {
+                Entity var10 = (Entity) aVar8;
 
-                if (par1Class.isAssignableFrom(var10.getClass()) && var10.boundingBox.intersectsWith(par2AxisAlignedBB) && (par4IEntitySelector == null || par4IEntitySelector.isEntityApplicable(var10)))
-                {
+                if (par1Class.isAssignableFrom(var10.getClass()) && var10.boundingBox.intersectsWith(par2AxisAlignedBB) && (par4IEntitySelector == null || par4IEntitySelector.isEntityApplicable(var10))) {
                     par3List.add(var10);
                 }
             }

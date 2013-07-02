@@ -193,7 +193,7 @@ public class InventoryMerchant implements IInventory
 
         if (var1 == null)
         {
-            this.setInventorySlotContents(2, (ItemStack)null);
+            this.setInventorySlotContents(2, null);
         }
         else
         {
@@ -219,12 +219,12 @@ public class InventoryMerchant implements IInventory
                     }
                     else
                     {
-                        this.setInventorySlotContents(2, (ItemStack)null);
+                        this.setInventorySlotContents(2, null);
                     }
                 }
                 else
                 {
-                    this.setInventorySlotContents(2, (ItemStack)null);
+                    this.setInventorySlotContents(2, null);
                 }
             }
         }

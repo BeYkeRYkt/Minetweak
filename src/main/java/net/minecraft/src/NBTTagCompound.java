@@ -412,12 +412,10 @@ public class NBTTagCompound extends NBTBase
     public NBTBase copy()
     {
         NBTTagCompound var1 = new NBTTagCompound(this.getName());
-        Iterator var2 = this.tagMap.keySet().iterator();
 
-        while (var2.hasNext())
-        {
-            String var3 = (String)var2.next();
-            var1.setTag(var3, ((NBTBase)this.tagMap.get(var3)).copy());
+        for (Object o : this.tagMap.keySet()) {
+            String var3 = (String) o;
+            var1.setTag(var3, ((NBTBase) this.tagMap.get(var3)).copy());
         }
 
         return var1;

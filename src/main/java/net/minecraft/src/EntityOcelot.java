@@ -30,7 +30,7 @@ public class EntityOcelot extends EntityTameable
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(18, Byte.valueOf((byte)0));
+        this.dataWatcher.addObject(18, (byte) 0);
     }
 
     /**
@@ -198,7 +198,7 @@ public class EntityOcelot extends EntityTameable
 
             if (var2.stackSize <= 0)
             {
-                par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack)null);
+                par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, null);
             }
 
             if (!this.worldObj.isRemote)
@@ -271,7 +271,7 @@ public class EntityOcelot extends EntityTameable
         else
         {
             EntityOcelot var2 = (EntityOcelot)par1EntityAnimal;
-            return !var2.isTamed() ? false : this.isInLove() && var2.isInLove();
+            return var2.isTamed() && this.isInLove() && var2.isInLove();
         }
     }
 
@@ -282,7 +282,7 @@ public class EntityOcelot extends EntityTameable
 
     public void setTameSkin(int par1)
     {
-        this.dataWatcher.updateObject(18, Byte.valueOf((byte)par1));
+        this.dataWatcher.updateObject(18, (byte) par1);
     }
 
     /**

@@ -105,14 +105,7 @@ public class WorldInfo
 
         this.theGameType = EnumGameType.getByID(par1NBTTagCompound.getInteger("GameType"));
 
-        if (par1NBTTagCompound.hasKey("MapFeatures"))
-        {
-            this.mapFeaturesEnabled = par1NBTTagCompound.getBoolean("MapFeatures");
-        }
-        else
-        {
-            this.mapFeaturesEnabled = true;
-        }
+        this.mapFeaturesEnabled = !par1NBTTagCompound.hasKey("MapFeatures") || par1NBTTagCompound.getBoolean("MapFeatures");
 
         this.spawnX = par1NBTTagCompound.getInteger("SpawnX");
         this.spawnY = par1NBTTagCompound.getInteger("SpawnY");
@@ -138,14 +131,7 @@ public class WorldInfo
         this.thundering = par1NBTTagCompound.getBoolean("thundering");
         this.hardcore = par1NBTTagCompound.getBoolean("hardcore");
 
-        if (par1NBTTagCompound.hasKey("initialized"))
-        {
-            this.initialized = par1NBTTagCompound.getBoolean("initialized");
-        }
-        else
-        {
-            this.initialized = true;
-        }
+        this.initialized = !par1NBTTagCompound.hasKey("initialized") || par1NBTTagCompound.getBoolean("initialized");
 
         if (par1NBTTagCompound.hasKey("allowCommands"))
         {

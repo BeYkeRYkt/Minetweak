@@ -8,7 +8,7 @@ public class FlatLayerInfo
     /** Block type used on this set of layers. */
     private int layerFillBlock;
 
-    /** Block metadata used on this set of laeyrs. */
+    /** Block metadata used on this set of layers. */
     private int layerFillBlockMeta;
     private int layerMinimumY;
 

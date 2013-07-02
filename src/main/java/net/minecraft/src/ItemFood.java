@@ -18,7 +18,7 @@ public class ItemFood extends Item
     private boolean alwaysEdible;
 
     /**
-     * represents the potion effect that will occurr upon eating this food. Set by setPotionEffect
+     * represents the potion effect that will occur upon eating this food. Set by setPotionEffect
      */
     private int potionId;
 

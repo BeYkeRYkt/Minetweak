@@ -139,14 +139,14 @@ public class ItemInWorldManager
         {
             if (this.isCreative())
             {
-                if (!this.theWorld.extinguishFire((EntityPlayer)null, par1, par2, par3, par4))
+                if (!this.theWorld.extinguishFire(null, par1, par2, par3, par4))
                 {
                     this.tryHarvestBlock(par1, par2, par3);
                 }
             }
             else
             {
-                this.theWorld.extinguishFire((EntityPlayer)null, par1, par2, par3, par4);
+                this.theWorld.extinguishFire(null, par1, par2, par3, par4);
                 this.initialDamage = this.curblockDamage;
                 float var5 = 1.0F;
                 int var6 = this.theWorld.getBlockId(par1, par2, par3);
@@ -209,6 +209,7 @@ public class ItemInWorldManager
     /**
      * note: this ignores the pars passed in and continues to destroy the onClickedBlock
      */
+    @SuppressWarnings("UnusedParameters")
     public void cancelDestroyingBlock(int par1, int par2, int par3)
     {
         this.isDestroyingBlock = false;
@@ -292,7 +293,7 @@ public class ItemInWorldManager
         int var5 = par3ItemStack.getItemDamage();
         ItemStack var6 = par3ItemStack.useItemRightClick(par2World, par1EntityPlayer);
 
-        if (var6 == par3ItemStack && (var6 == null || var6.stackSize == var4 && var6.getMaxItemUseDuration() <= 0 && var6.getItemDamage() == var5))
+        if (var6 == par3ItemStack && (var6.stackSize == var4 && var6.getMaxItemUseDuration() <= 0 && var6.getItemDamage() == var5))
         {
             return false;
         }

@@ -66,7 +66,7 @@ public class ItemReed extends Item
         }
         else
         {
-            if (par3World.canPlaceEntityOnSide(this.spawnID, par4, par5, par6, false, par7, (Entity)null, par1ItemStack))
+            if (par3World.canPlaceEntityOnSide(this.spawnID, par4, par5, par6, false, par7, null, par1ItemStack))
             {
                 Block var12 = Block.blocksList[this.spawnID];
                 int var13 = var12.onBlockPlaced(par3World, par4, par5, par6, par7, par8, par9, par10, 0);

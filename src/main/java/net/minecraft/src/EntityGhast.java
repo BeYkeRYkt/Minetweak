@@ -49,7 +49,7 @@ public class EntityGhast extends EntityFlying implements IMob
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
+        this.dataWatcher.addObject(16, (byte) 0);
     }
 
     public int getMaxHealth()
@@ -135,14 +135,14 @@ public class EntityGhast extends EntityFlying implements IMob
             {
                 if (this.attackCounter == 10)
                 {
-                    this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1007, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
+                    this.worldObj.playAuxSFXAtEntity(null, 1007, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
                 }
 
                 ++this.attackCounter;
 
                 if (this.attackCounter == 20)
                 {
-                    this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1008, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
+                    this.worldObj.playAuxSFXAtEntity(null, 1008, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
                     EntityLargeFireball var17 = new EntityLargeFireball(this.worldObj, this, var11, var13, var15);
                     var17.field_92057_e = this.explosionStrength;
                     double var18 = 4.0D;
@@ -176,7 +176,7 @@ public class EntityGhast extends EntityFlying implements IMob
 
             if (var21 != var12)
             {
-                this.dataWatcher.updateObject(16, Byte.valueOf(var12));
+                this.dataWatcher.updateObject(16, var12);
             }
         }
     }

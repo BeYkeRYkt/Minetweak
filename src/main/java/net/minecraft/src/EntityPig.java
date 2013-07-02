@@ -55,7 +55,7 @@ public class EntityPig extends EntityAnimal
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
+        this.dataWatcher.addObject(16, (byte) 0);
     }
 
     /**
@@ -176,11 +176,11 @@ public class EntityPig extends EntityAnimal
     {
         if (par1)
         {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)1));
+            this.dataWatcher.updateObject(16, (byte) 1);
         }
         else
         {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)0));
+            this.dataWatcher.updateObject(16, (byte) 0);
         }
     }
 

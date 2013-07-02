@@ -19,7 +19,7 @@ public class EntityItemFrame extends EntityHanging
     protected void entityInit()
     {
         this.getDataWatcher().addObjectByDataType(2, 5);
-        this.getDataWatcher().addObject(3, Byte.valueOf((byte)0));
+        this.getDataWatcher().addObject(3, (byte) 0);
     }
 
     public int func_82329_d()
@@ -72,7 +72,7 @@ public class EntityItemFrame extends EntityHanging
 
     public void setItemRotation(int par1)
     {
-        this.getDataWatcher().updateObject(3, Byte.valueOf((byte)(par1 % 4)));
+        this.getDataWatcher().updateObject(3, (byte) (par1 % 4));
     }
 
     /**

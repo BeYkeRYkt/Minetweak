@@ -4,8 +4,6 @@ public class ItemArmor extends Item
 {
     /** Holds the 'base' maxDamage that each armorType have. */
     private static final int[] maxDamageArray = new int[] {11, 16, 15, 13};
-    private static final String[] field_94606_cu = new String[] {"helmetCloth_overlay", "chestplateCloth_overlay", "leggingsCloth_overlay", "bootsCloth_overlay"};
-    public static final String[] field_94603_a = new String[] {"slot_empty_helmet", "slot_empty_chestplate", "slot_empty_leggings", "slot_empty_boots"};
     private static final IBehaviorDispenseItem field_96605_cw = new BehaviorDispenseArmor();
 
     /**
@@ -59,7 +57,7 @@ public class ItemArmor extends Item
      */
     public boolean hasColor(ItemStack par1ItemStack)
     {
-        return this.material != EnumArmorMaterial.CLOTH ? false : (!par1ItemStack.hasTagCompound() ? false : (!par1ItemStack.getTagCompound().hasKey("display") ? false : par1ItemStack.getTagCompound().getCompoundTag("display").hasKey("color")));
+        return this.material == EnumArmorMaterial.CLOTH && (par1ItemStack.hasTagCompound() && (par1ItemStack.getTagCompound().hasKey("display") && par1ItemStack.getTagCompound().getCompoundTag("display").hasKey("color")));
     }
 
     /**
@@ -140,7 +138,7 @@ public class ItemArmor extends Item
      */
     public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
     {
-        return this.material.getArmorCraftingMaterial() == par2ItemStack.itemID ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+        return this.material.getArmorCraftingMaterial() == par2ItemStack.itemID || super.getIsRepairable(par1ItemStack, par2ItemStack);
     }
 
     /**

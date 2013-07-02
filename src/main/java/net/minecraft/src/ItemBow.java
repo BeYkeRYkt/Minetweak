@@ -2,7 +2,6 @@ package net.minecraft.src;
 
 public class ItemBow extends Item
 {
-    public static final String[] bowPullIconNameArray = new String[] {"bow_pull_0", "bow_pull_1", "bow_pull_2"};
 
     public ItemBow(int par1)
     {

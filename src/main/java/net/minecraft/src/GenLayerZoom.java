@@ -27,13 +27,13 @@ public class GenLayerZoom extends GenLayer
         {
             var13 = var12 << 1;
             int var14 = var13 * var11;
-            int var15 = var9[0 + (var12 + 0) * var7];
-            int var16 = var9[0 + (var12 + 1) * var7];
+            int var15 = var9[((var12) * var7)];
+            int var16 = var9[((var12 + 1) * var7)];
 
             for (int var17 = 0; var17 < var7 - 1; ++var17)
             {
                 this.initChunkSeed((long)(var17 + var5 << 1), (long)(var12 + var6 << 1));
-                int var18 = var9[var17 + 1 + (var12 + 0) * var7];
+                int var18 = var9[var17 + 1 + (var12) * var7];
                 int var19 = var9[var17 + 1 + (var12 + 1) * var7];
                 var10[var14] = var15;
                 var10[var14++ + var11] = this.choose(var15, var16);
@@ -95,10 +95,6 @@ public class GenLayerZoom extends GenLayer
         {
             return par1;
         }
-        else if (par2 == par1 && par3 != par4)
-        {
-            return par2;
-        }
         else if (par2 == par3 && par1 != par4)
         {
             return par2;
@@ -107,39 +103,18 @@ public class GenLayerZoom extends GenLayer
         {
             return par2;
         }
-        else if (par3 == par1 && par2 != par4)
-        {
-            return par3;
-        }
-        else if (par3 == par2 && par1 != par4)
-        {
-            return par3;
-        }
         else if (par3 == par4 && par1 != par2)
         {
             return par3;
         }
-        else if (par4 == par1 && par2 != par3)
-        {
-            return par3;
-        }
-        else if (par4 == par2 && par1 != par3)
-        {
-            return par3;
-        }
-        else if (par4 == par3 && par1 != par2)
-        {
-            return par3;
-        }
-        else
-        {
+        else {
             int var5 = this.nextInt(4);
             return var5 == 0 ? par1 : (var5 == 1 ? par2 : (var5 == 2 ? par3 : par4));
         }
     }
 
     /**
-     * Magnify a layer. Parms are seed adjustment, layer, number of times to magnify
+     * Magnify a layer. params are seed adjustment, layer, number of times to magnify
      */
     public static GenLayer magnify(long par0, GenLayer par2GenLayer, int par3)
     {

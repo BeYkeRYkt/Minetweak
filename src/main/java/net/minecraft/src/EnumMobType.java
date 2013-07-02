@@ -4,5 +4,5 @@ public enum EnumMobType
 {
     everything,
     mobs,
-    players;
+    players
 }

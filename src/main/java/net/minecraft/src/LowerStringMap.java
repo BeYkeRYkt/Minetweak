@@ -1,15 +1,14 @@
 package net.minecraft.src;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.Map.Entry;
 
+@SuppressWarnings("NullableProblems")
 public class LowerStringMap implements Map
 {
-    private final Map internalMap = new LinkedHashMap();
+    private final Map<String, Object> internalMap = new LinkedHashMap<String, Object>();
 
     public int size()
     {
@@ -28,6 +27,7 @@ public class LowerStringMap implements Map
 
     public boolean containsValue(Object par1Obj)
     {
+        //noinspection SuspiciousMethodCalls
         return this.internalMap.containsKey(par1Obj);
     }
 
@@ -51,12 +51,10 @@ public class LowerStringMap implements Map
 
     public void putAll(Map par1Map)
     {
-        Iterator var2 = par1Map.entrySet().iterator();
 
-        while (var2.hasNext())
-        {
-            Entry var3 = (Entry)var2.next();
-            this.putLower((String)var3.getKey(), var3.getValue());
+        for (Object o : par1Map.entrySet()) {
+            Entry var3 = (Entry) o;
+            this.putLower((String) var3.getKey(), var3.getValue());
         }
     }
 

@@ -89,7 +89,7 @@ public abstract class NBTBase
                 CrashReport var5 = CrashReport.makeCrashReport(var7, "Loading NBT data");
                 CrashReportCategory var6 = var5.makeCategory("NBT Tag");
                 var6.addCrashSection("Tag name", var2);
-                var6.addCrashSection("Tag type", Byte.valueOf(var1));
+                var6.addCrashSection("Tag type", var1);
                 throw new ReportedException(var5);
             }
         }
@@ -196,7 +196,7 @@ public abstract class NBTBase
         else
         {
             NBTBase var2 = (NBTBase)par1Obj;
-            return this.getId() != var2.getId() ? false : ((this.name != null || var2.name == null) && (this.name == null || var2.name != null) ? this.name == null || this.name.equals(var2.name) : false);
+            return this.getId() == var2.getId() && ((this.name != null || var2.name == null) && (this.name == null || var2.name != null) && (this.name == null || this.name.equals(var2.name)));
         }
     }
 

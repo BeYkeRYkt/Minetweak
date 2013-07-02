@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class Explosion
 {
     /** whether or not the explosion sets fire to blocks around it */
@@ -25,8 +26,8 @@ public class Explosion
     public float explosionSize;
 
     /** A list of ChunkPositions of blocks affected by this explosion */
-    public List affectedBlockPositions = new ArrayList();
-    private Map field_77288_k = new HashMap();
+    public List<ChunkPosition> affectedBlockPositions = new ArrayList<ChunkPosition>();
+    private Map<ICommandSender, Vec3> field_77288_k = new HashMap<ICommandSender, Vec3>();
 
     public Explosion(World par1World, Entity par2Entity, double par3, double par5, double par7, float par9)
     {
@@ -44,7 +45,7 @@ public class Explosion
     public void doExplosionA()
     {
         float var1 = this.explosionSize;
-        HashSet var2 = new HashSet();
+        HashSet<ChunkPosition> var2 = new HashSet<ChunkPosition>();
         int var3;
         int var4;
         int var5;
@@ -111,34 +112,30 @@ public class Explosion
         List var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this.exploder, AxisAlignedBB.getAABBPool().getAABB((double)var3, (double)var5, (double)var7, (double)var4, (double)var29, (double)var30));
         Vec3 var31 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.explosionX, this.explosionY, this.explosionZ);
 
-        for (int var11 = 0; var11 < var9.size(); ++var11)
-        {
-            Entity var32 = (Entity)var9.get(var11);
-            double var13 = var32.getDistance(this.explosionX, this.explosionY, this.explosionZ) / (double)this.explosionSize;
+        for (Object aVar9 : var9) {
+            Entity var32 = (Entity) aVar9;
+            double var13 = var32.getDistance(this.explosionX, this.explosionY, this.explosionZ) / (double) this.explosionSize;
 
-            if (var13 <= 1.0D)
-            {
+            if (var13 <= 1.0D) {
                 var15 = var32.posX - this.explosionX;
-                var17 = var32.posY + (double)var32.getEyeHeight() - this.explosionY;
+                var17 = var32.posY + (double) var32.getEyeHeight() - this.explosionY;
                 var19 = var32.posZ - this.explosionZ;
-                double var34 = (double)MathHelper.sqrt_double(var15 * var15 + var17 * var17 + var19 * var19);
+                double var34 = (double) MathHelper.sqrt_double(var15 * var15 + var17 * var17 + var19 * var19);
 
-                if (var34 != 0.0D)
-                {
+                if (var34 != 0.0D) {
                     var15 /= var34;
                     var17 /= var34;
                     var19 /= var34;
-                    double var33 = (double)this.worldObj.getBlockDensity(var31, var32.boundingBox);
+                    double var33 = (double) this.worldObj.getBlockDensity(var31, var32.boundingBox);
                     double var35 = (1.0D - var13) * var33;
-                    var32.attackEntityFrom(DamageSource.setExplosionSource(this), (int)((var35 * var35 + var35) / 2.0D * 8.0D * (double)this.explosionSize + 1.0D));
+                    var32.attackEntityFrom(DamageSource.setExplosionSource(this), (int) ((var35 * var35 + var35) / 2.0D * 8.0D * (double) this.explosionSize + 1.0D));
                     double var36 = EnchantmentProtection.func_92092_a(var32, var35);
                     var32.motionX += var15 * var36;
                     var32.motionY += var17 * var36;
                     var32.motionZ += var19 * var36;
 
-                    if (var32 instanceof EntityPlayer)
-                    {
-                        this.field_77288_k.put((EntityPlayer)var32, this.worldObj.getWorldVec3Pool().getVecFromPool(var15 * var35, var17 * var35, var19 * var35));
+                    if (var32 instanceof EntityPlayer) {
+                        this.field_77288_k.put((EntityPlayer) var32, this.worldObj.getWorldVec3Pool().getVecFromPool(var15 * var35, var17 * var35, var19 * var35));
                     }
                 }
             }
@@ -163,7 +160,7 @@ public class Explosion
             this.worldObj.spawnParticle("largeexplode", this.explosionX, this.explosionY, this.explosionZ, 1.0D, 0.0D, 0.0D);
         }
 
-        Iterator var2;
+        Iterator<ChunkPosition> var2;
         ChunkPosition var3;
         int var4;
         int var5;
@@ -176,7 +173,7 @@ public class Explosion
 
             while (var2.hasNext())
             {
-                var3 = (ChunkPosition)var2.next();
+                var3 = var2.next();
                 var4 = var3.x;
                 var5 = var3.y;
                 var6 = var3.z;
@@ -224,7 +221,7 @@ public class Explosion
 
             while (var2.hasNext())
             {
-                var3 = (ChunkPosition)var2.next();
+                var3 = var2.next();
                 var4 = var3.x;
                 var5 = var3.y;
                 var6 = var3.z;
@@ -239,7 +236,7 @@ public class Explosion
         }
     }
 
-    public Map func_77277_b()
+    public Map<ICommandSender, Vec3> func_77277_b()
     {
         return this.field_77288_k;
     }

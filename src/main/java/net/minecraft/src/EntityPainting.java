@@ -14,25 +14,22 @@ public class EntityPainting extends EntityHanging
     public EntityPainting(World par1World, int par2, int par3, int par4, int par5)
     {
         super(par1World, par2, par3, par4, par5);
-        ArrayList var6 = new ArrayList();
+        ArrayList<EnumArt> var6 = new ArrayList<EnumArt>();
         EnumArt[] var7 = EnumArt.values();
         int var8 = var7.length;
 
-        for (int var9 = 0; var9 < var8; ++var9)
-        {
-            EnumArt var10 = var7[var9];
+        for (EnumArt var10 : var7) {
             this.art = var10;
             this.setDirection(par5);
 
-            if (this.onValidSurface())
-            {
+            if (this.onValidSurface()) {
                 var6.add(var10);
             }
         }
 
         if (!var6.isEmpty())
         {
-            this.art = (EnumArt)var6.get(this.rand.nextInt(var6.size()));
+            this.art = var6.get(this.rand.nextInt(var6.size()));
         }
 
         this.setDirection(par5);
@@ -54,14 +51,9 @@ public class EntityPainting extends EntityHanging
     {
         String var2 = par1NBTTagCompound.getString("Motive");
         EnumArt[] var3 = EnumArt.values();
-        int var4 = var3.length;
 
-        for (int var5 = 0; var5 < var4; ++var5)
-        {
-            EnumArt var6 = var3[var5];
-
-            if (var6.title.equals(var2))
-            {
+        for (EnumArt var6 : var3) {
+            if (var6.title.equals(var2)) {
                 this.art = var6;
             }
         }

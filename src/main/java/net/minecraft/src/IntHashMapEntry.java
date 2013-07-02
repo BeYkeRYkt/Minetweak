@@ -47,10 +47,10 @@ class IntHashMapEntry
         else
         {
             IntHashMapEntry var2 = (IntHashMapEntry)par1Obj;
-            Integer var3 = Integer.valueOf(this.getHash());
-            Integer var4 = Integer.valueOf(var2.getHash());
+            Integer var3 = this.getHash();
+            Integer var4 = var2.getHash();
 
-            if (var3 == var4 || var3 != null && var3.equals(var4))
+            if (var3.equals(var4) || var3.equals(var4))
             {
                 Object var5 = this.getValue();
                 Object var6 = var2.getValue();

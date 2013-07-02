@@ -5,13 +5,13 @@ public class NextTickListEntry implements Comparable
     /** The id number for the next tick entry */
     private static long nextTickEntryID = 0L;
 
-    /** X position this tick is occuring at */
+    /** X position this tick is occurring at */
     public int xCoord;
 
-    /** Y position this tick is occuring at */
+    /** Y position this tick is occurring at */
     public int yCoord;
 
-    /** Z position this tick is occuring at */
+    /** Z position this tick is occurring at */
     public int zCoord;
 
     /**

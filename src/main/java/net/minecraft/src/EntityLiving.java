@@ -409,7 +409,7 @@ public abstract class EntityLiving extends Entity
 
     public boolean isWithinHomeDistance(int par1, int par2, int par3)
     {
-        return this.maximumHomeDistance == -1.0F ? true : this.homePosition.getDistanceSquared(par1, par2, par3) < this.maximumHomeDistance * this.maximumHomeDistance;
+        return this.maximumHomeDistance == -1.0F || this.homePosition.getDistanceSquared(par1, par2, par3) < this.maximumHomeDistance * this.maximumHomeDistance;
     }
 
     public void setHomeArea(int par1, int par2, int par3, int par4)
@@ -2237,15 +2237,15 @@ public abstract class EntityLiving extends Entity
             {
                 if (this.activePotionsMap.isEmpty())
                 {
-                    this.dataWatcher.updateObject(9, Byte.valueOf((byte)0));
-                    this.dataWatcher.updateObject(8, Integer.valueOf(0));
+                    this.dataWatcher.updateObject(9, (byte) 0);
+                    this.dataWatcher.updateObject(8, 0);
                     this.setInvisible(false);
                 }
                 else
                 {
                     var12 = PotionHelper.calcPotionLiquidColor(this.activePotionsMap.values());
-                    this.dataWatcher.updateObject(9, Byte.valueOf((byte)(PotionHelper.func_82817_b(this.activePotionsMap.values()) ? 1 : 0)));
-                    this.dataWatcher.updateObject(8, Integer.valueOf(var12));
+                    this.dataWatcher.updateObject(9, (byte) (PotionHelper.func_82817_b(this.activePotionsMap.values()) ? 1 : 0));
+                    this.dataWatcher.updateObject(8, var12);
                     this.setInvisible(this.isPotionActive(Potion.invisibility.id));
                 }
             }
@@ -2790,7 +2790,7 @@ public abstract class EntityLiving extends Entity
      */
     private int getArmSwingAnimationEnd()
     {
-        return this.isPotionActive(Potion.digSpeed) ? 6 - (1 + this.getActivePotionEffect(Potion.digSpeed).getAmplifier()) * 1 : (this.isPotionActive(Potion.digSlowdown) ? 6 + (1 + this.getActivePotionEffect(Potion.digSlowdown).getAmplifier()) * 2 : 6);
+        return this.isPotionActive(Potion.digSpeed) ? 6 : (this.isPotionActive(Potion.digSlowdown) ? 6 + (1 + this.getActivePotionEffect(Potion.digSlowdown).getAmplifier()) * 2 : 6);
     }
 
     /**

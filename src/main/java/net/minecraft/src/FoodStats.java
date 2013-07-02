@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+@SuppressWarnings({"FieldCanBeLocal", "UnusedDeclaration"})
 public class FoodStats
 {
     /** The player's food level. */

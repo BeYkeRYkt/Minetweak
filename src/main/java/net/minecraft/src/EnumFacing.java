@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+@SuppressWarnings("FieldCanBeLocal")
 public enum EnumFacing
 {
     DOWN(0, 1, 0, -1, 0),
@@ -63,9 +64,7 @@ public enum EnumFacing
         EnumFacing[] var0 = values();
         int var1 = var0.length;
 
-        for (int var2 = 0; var2 < var1; ++var2)
-        {
-            EnumFacing var3 = var0[var2];
+        for (EnumFacing var3 : var0) {
             faceList[var3.order_a] = var3;
         }
     }

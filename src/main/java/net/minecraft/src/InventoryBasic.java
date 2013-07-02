@@ -2,6 +2,7 @@ package net.minecraft.src;
 
 import java.util.List;
 
+@SuppressWarnings("UnusedDeclaration")
 public class InventoryBasic implements IInventory
 {
     private String inventoryTitle;

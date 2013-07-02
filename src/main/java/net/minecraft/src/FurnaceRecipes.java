@@ -8,8 +8,8 @@ public class FurnaceRecipes
     private static final FurnaceRecipes smeltingBase = new FurnaceRecipes();
 
     /** The list of smelting results. */
-    private Map smeltingList = new HashMap();
-    private Map experienceList = new HashMap();
+    private Map<Number, ItemStack> smeltingList = new HashMap<Number, ItemStack>();
+    private Map<Number, Float> experienceList = new HashMap<Number, Float>();
 
     /**
      * Used to call methods addSmelting and getSmeltingResult.
@@ -47,8 +47,8 @@ public class FurnaceRecipes
      */
     public void addSmelting(int par1, ItemStack par2ItemStack, float par3)
     {
-        this.smeltingList.put(Integer.valueOf(par1), par2ItemStack);
-        this.experienceList.put(Integer.valueOf(par2ItemStack.itemID), Float.valueOf(par3));
+        this.smeltingList.put(par1, par2ItemStack);
+        this.experienceList.put(par2ItemStack.itemID, par3);
     }
 
     /**
@@ -56,16 +56,16 @@ public class FurnaceRecipes
      */
     public ItemStack getSmeltingResult(int par1)
     {
-        return (ItemStack)this.smeltingList.get(Integer.valueOf(par1));
+        return this.smeltingList.get(par1);
     }
 
-    public Map getSmeltingList()
+    public Map<Number, ItemStack> getSmeltingList()
     {
         return this.smeltingList;
     }
 
     public float getExperience(int par1)
     {
-        return this.experienceList.containsKey(Integer.valueOf(par1)) ? ((Float)this.experienceList.get(Integer.valueOf(par1))).floatValue() : 0.0F;
+        return this.experienceList.containsKey(par1) ? this.experienceList.get(par1) : 0.0F;
     }
 }

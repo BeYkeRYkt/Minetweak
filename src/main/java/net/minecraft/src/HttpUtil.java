@@ -7,7 +7,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
@@ -21,36 +20,26 @@ public class HttpUtil
     public static String buildPostString(Map par0Map)
     {
         StringBuilder var1 = new StringBuilder();
-        Iterator var2 = par0Map.entrySet().iterator();
 
-        while (var2.hasNext())
-        {
-            Entry var3 = (Entry)var2.next();
+        for (Object o : par0Map.entrySet()) {
+            Entry var3 = (Entry) o;
 
-            if (var1.length() > 0)
-            {
+            if (var1.length() > 0) {
                 var1.append('&');
             }
 
-            try
-            {
-                var1.append(URLEncoder.encode((String)var3.getKey(), "UTF-8"));
-            }
-            catch (UnsupportedEncodingException var6)
-            {
+            try {
+                var1.append(URLEncoder.encode((String) var3.getKey(), "UTF-8"));
+            } catch (UnsupportedEncodingException var6) {
                 var6.printStackTrace();
             }
 
-            if (var3.getValue() != null)
-            {
+            if (var3.getValue() != null) {
                 var1.append('=');
 
-                try
-                {
+                try {
                     var1.append(URLEncoder.encode(var3.getValue().toString(), "UTF-8"));
-                }
-                catch (UnsupportedEncodingException var5)
-                {
+                } catch (UnsupportedEncodingException var5) {
                     var5.printStackTrace();
                 }
             }
@@ -87,7 +76,7 @@ public class HttpUtil
             var5.flush();
             var5.close();
             BufferedReader var6 = new BufferedReader(new InputStreamReader(var4.getInputStream()));
-            StringBuffer var8 = new StringBuffer();
+            StringBuilder var8 = new StringBuilder();
             String var7;
 
             while ((var7 = var6.readLine()) != null)

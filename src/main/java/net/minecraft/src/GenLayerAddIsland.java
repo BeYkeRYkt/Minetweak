@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+@SuppressWarnings("UnusedAssignment")
 public class GenLayerAddIsland extends GenLayer
 {
     public GenLayerAddIsland(long par1, GenLayer par3GenLayer)
@@ -25,8 +26,8 @@ public class GenLayerAddIsland extends GenLayer
         {
             for (int var12 = 0; var12 < par3; ++var12)
             {
-                int var13 = var9[var12 + 0 + (var11 + 0) * var7];
-                int var14 = var9[var12 + 2 + (var11 + 0) * var7];
+                int var13 = var9[var12 + 0 + (var11) * var7];
+                int var14 = var9[var12 + 2 + (var11) * var7];
                 int var15 = var9[var12 + 0 + (var11 + 2) * var7];
                 int var16 = var9[var12 + 2 + (var11 + 2) * var7];
                 int var17 = var9[var12 + 1 + (var11 + 1) * var7];

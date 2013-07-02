@@ -230,8 +230,8 @@ public abstract class Entity
             this.dimension = par1World.provider.dimensionId;
         }
 
-        this.dataWatcher.addObject(0, Byte.valueOf((byte)0));
-        this.dataWatcher.addObject(1, Short.valueOf((short)300));
+        this.dataWatcher.addObject(0, (byte) 0);
+        this.dataWatcher.addObject(1, (short) 300);
         this.entityInit();
     }
 
@@ -244,7 +244,7 @@ public abstract class Entity
 
     public boolean equals(Object par1Obj)
     {
-        return par1Obj instanceof Entity ? ((Entity)par1Obj).entityId == this.entityId : false;
+        return par1Obj instanceof Entity && ((Entity) par1Obj).entityId == this.entityId;
     }
 
     public int hashCode()
@@ -1489,13 +1489,10 @@ public abstract class Entity
     protected NBTTagList newDoubleNBTList(double ... par1ArrayOfDouble)
     {
         NBTTagList var2 = new NBTTagList();
-        double[] var3 = par1ArrayOfDouble;
         int var4 = par1ArrayOfDouble.length;
 
-        for (int var5 = 0; var5 < var4; ++var5)
-        {
-            double var6 = var3[var5];
-            var2.appendTag(new NBTTagDouble((String)null, var6));
+        for (double var6 : par1ArrayOfDouble) {
+            var2.appendTag(new NBTTagDouble((String) null, var6));
         }
 
         return var2;
@@ -1561,7 +1558,7 @@ public abstract class Entity
     {
         for (int var1 = 0; var1 < 8; ++var1)
         {
-            float var2 = ((float)((var1 >> 0) % 2) - 0.5F) * this.width * 0.8F;
+            float var2 = ((float)((var1) % 2) - 0.5F) * this.width * 0.8F;
             float var3 = ((float)((var1 >> 1) % 2) - 0.5F) * 0.1F;
             float var4 = ((float)((var1 >> 2) % 2) - 0.5F) * this.width * 0.8F;
             int var5 = MathHelper.floor_double(this.posX + (double)var2);
@@ -1915,11 +1912,11 @@ public abstract class Entity
 
         if (par2)
         {
-            this.dataWatcher.updateObject(0, Byte.valueOf((byte)(var3 | 1 << par1)));
+            this.dataWatcher.updateObject(0, (byte) (var3 | 1 << par1));
         }
         else
         {
-            this.dataWatcher.updateObject(0, Byte.valueOf((byte)(var3 & ~(1 << par1))));
+            this.dataWatcher.updateObject(0, (byte) (var3 & ~(1 << par1)));
         }
     }
 
@@ -1930,7 +1927,7 @@ public abstract class Entity
 
     public void setAir(int par1)
     {
-        this.dataWatcher.updateObject(1, Short.valueOf((short)par1));
+        this.dataWatcher.updateObject(1, (short) par1);
     }
 
     /**
@@ -2022,11 +2019,6 @@ public abstract class Entity
                 this.motionX = (double)var26;
             }
 
-            if (var23 == 2)
-            {
-                this.motionY = (double)(-var26);
-            }
-
             if (var23 == 3)
             {
                 this.motionY = (double)var26;
@@ -2106,7 +2098,7 @@ public abstract class Entity
 
     public String toString()
     {
-        return String.format("%s[\'%s\'/%d, l=\'%s\', x=%.2f, y=%.2f, z=%.2f]", new Object[] {this.getClass().getSimpleName(), this.getEntityName(), Integer.valueOf(this.entityId), this.worldObj == null ? "~NULL~" : this.worldObj.getWorldInfo().getWorldName(), Double.valueOf(this.posX), Double.valueOf(this.posY), Double.valueOf(this.posZ)});
+        return String.format("%s[\'%s\'/%d, l=\'%s\', x=%.2f, y=%.2f, z=%.2f]", this.getClass().getSimpleName(), this.getEntityName(), this.entityId, this.worldObj == null ? "~NULL~" : this.worldObj.getWorldInfo().getWorldName(), Double.valueOf(this.posX), Double.valueOf(this.posY), Double.valueOf(this.posZ));
     }
 
     /**
@@ -2198,11 +2190,11 @@ public abstract class Entity
     public void func_85029_a(CrashReportCategory par1CrashReportCategory)
     {
         par1CrashReportCategory.addCrashSectionCallable("Entity Type", new CallableEntityType(this));
-        par1CrashReportCategory.addCrashSection("Entity ID", Integer.valueOf(this.entityId));
+        par1CrashReportCategory.addCrashSection("Entity ID", this.entityId);
         par1CrashReportCategory.addCrashSectionCallable("Entity Name", new CallableEntityName(this));
-        par1CrashReportCategory.addCrashSection("Entity\'s Exact location", String.format("%.2f, %.2f, %.2f", new Object[] {Double.valueOf(this.posX), Double.valueOf(this.posY), Double.valueOf(this.posZ)}));
+        par1CrashReportCategory.addCrashSection("Entity\'s Exact location", String.format("%.2f, %.2f, %.2f", this.posX, this.posY, this.posZ));
         par1CrashReportCategory.addCrashSection("Entity\'s Block location", CrashReportCategory.getLocationInfo(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)));
-        par1CrashReportCategory.addCrashSection("Entity\'s Momentum", String.format("%.2f, %.2f, %.2f", new Object[] {Double.valueOf(this.motionX), Double.valueOf(this.motionY), Double.valueOf(this.motionZ)}));
+        par1CrashReportCategory.addCrashSection("Entity\'s Momentum", String.format("%.2f, %.2f, %.2f", this.motionX, this.motionY, this.motionZ));
     }
 
     public boolean func_96092_aw()

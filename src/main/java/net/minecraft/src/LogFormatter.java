@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 
+@SuppressWarnings({"ThrowableResultOfMethodCallIgnored", "UnusedParameters"})
 class LogFormatter extends Formatter
 {
     private SimpleDateFormat field_98228_b;
@@ -21,7 +22,7 @@ class LogFormatter extends Formatter
     public String format(LogRecord par1LogRecord)
     {
         StringBuilder var2 = new StringBuilder();
-        var2.append(this.field_98228_b.format(Long.valueOf(par1LogRecord.getMillis())));
+        var2.append(this.field_98228_b.format(par1LogRecord.getMillis()));
 
         if (LogAgent.func_98237_a(this.field_98229_a) != null)
         {

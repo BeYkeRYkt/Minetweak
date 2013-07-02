@@ -12,7 +12,7 @@ public class MathHelper
     /**
      * sin looked up in a table
      */
-    public static final float sin(float par0)
+    public static float sin(float par0)
     {
         return SIN_TABLE[(int)(par0 * 10430.378F) & 65535];
     }
@@ -20,17 +20,17 @@ public class MathHelper
     /**
      * cos looked up in the sin table with the appropriate offset
      */
-    public static final float cos(float par0)
+    public static float cos(float par0)
     {
         return SIN_TABLE[(int)(par0 * 10430.378F + 16384.0F) & 65535];
     }
 
-    public static final float sqrt_float(float par0)
+    public static float sqrt_float(float par0)
     {
         return (float)Math.sqrt((double)par0);
     }
 
-    public static final float sqrt_double(double par0)
+    public static float sqrt_double(double par0)
     {
         return (float)Math.sqrt(par0);
     }
@@ -127,12 +127,8 @@ public class MathHelper
     public static double average(long[] par0ArrayOfLong)
     {
         long var1 = 0L;
-        long[] var3 = par0ArrayOfLong;
-        int var4 = par0ArrayOfLong.length;
 
-        for (int var5 = 0; var5 < var4; ++var5)
-        {
-            long var6 = var3[var5];
+        for (long var6 : par0ArrayOfLong) {
             var1 += var6;
         }
 
@@ -190,9 +186,8 @@ public class MathHelper
         {
             var2 = Integer.parseInt(par0Str);
         }
-        catch (Throwable var4)
+        catch (Throwable ignored)
         {
-            ;
         }
 
         return var2;
@@ -209,9 +204,8 @@ public class MathHelper
         {
             var3 = Integer.parseInt(par0Str);
         }
-        catch (Throwable var5)
+        catch (Throwable ignored)
         {
-            ;
         }
 
         if (var3 < par2)
@@ -233,9 +227,8 @@ public class MathHelper
         {
             var3 = Double.parseDouble(par0Str);
         }
-        catch (Throwable var6)
+        catch (Throwable ignored)
         {
-            ;
         }
 
         return var3;
@@ -249,9 +242,8 @@ public class MathHelper
         {
             var5 = Double.parseDouble(par0Str);
         }
-        catch (Throwable var8)
+        catch (Throwable ignored)
         {
-            ;
         }
 
         if (var5 < par3)

@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -12,15 +11,12 @@ public class MapGenMineshaft extends MapGenStructure
 
     public MapGenMineshaft(Map par1Map)
     {
-        Iterator var2 = par1Map.entrySet().iterator();
 
-        while (var2.hasNext())
-        {
-            Entry var3 = (Entry)var2.next();
+        for (Object o : par1Map.entrySet()) {
+            Entry var3 = (Entry) o;
 
-            if (((String)var3.getKey()).equals("chance"))
-            {
-                this.field_82673_e = MathHelper.parseDoubleWithDefault((String)var3.getValue(), this.field_82673_e);
+            if (var3.getKey().equals("chance")) {
+                this.field_82673_e = MathHelper.parseDoubleWithDefault((String) var3.getValue(), this.field_82673_e);
             }
         }
     }

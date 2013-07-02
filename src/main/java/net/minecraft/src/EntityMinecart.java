@@ -66,12 +66,12 @@ public abstract class EntityMinecart extends Entity
 
     protected void entityInit()
     {
-        this.dataWatcher.addObject(17, new Integer(0));
-        this.dataWatcher.addObject(18, new Integer(1));
-        this.dataWatcher.addObject(19, new Integer(0));
-        this.dataWatcher.addObject(20, new Integer(0));
-        this.dataWatcher.addObject(21, new Integer(6));
-        this.dataWatcher.addObject(22, Byte.valueOf((byte)0));
+        this.dataWatcher.addObject(17, 0);
+        this.dataWatcher.addObject(18, 1);
+        this.dataWatcher.addObject(19, 0);
+        this.dataWatcher.addObject(20, 0);
+        this.dataWatcher.addObject(21, 6);
+        this.dataWatcher.addObject(22, (byte) 0);
     }
 
     /**
@@ -359,12 +359,10 @@ public abstract class EntityMinecart extends Entity
 
             if (var15 != null && !var15.isEmpty())
             {
-                for (int var16 = 0; var16 < var15.size(); ++var16)
-                {
-                    Entity var17 = (Entity)var15.get(var16);
+                for (Object aVar15 : var15) {
+                    Entity var17 = (Entity) aVar15;
 
-                    if (var17 != this.riddenByEntity && var17.canBePushed() && var17 instanceof EntityMinecart)
-                    {
+                    if (var17 != this.riddenByEntity && var17.canBePushed() && var17 instanceof EntityMinecart) {
                         var17.applyEntityCollision(this);
                     }
                 }
@@ -702,7 +700,7 @@ public abstract class EntityMinecart extends Entity
             }
 
             int[][] var12 = matrix[var11];
-            double var13 = 0.0D;
+            double var13;
             double var15 = (double)var7 + 0.5D + (double)var12[0][0] * 0.5D;
             double var17 = (double)var8 + 0.5D + (double)var12[0][1] * 0.5D;
             double var19 = (double)var9 + 0.5D + (double)var12[0][2] * 0.5D;
@@ -888,7 +886,7 @@ public abstract class EntityMinecart extends Entity
      */
     public void setDamage(int par1)
     {
-        this.dataWatcher.updateObject(19, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(19, par1);
     }
 
     /**
@@ -905,7 +903,7 @@ public abstract class EntityMinecart extends Entity
      */
     public void setRollingAmplitude(int par1)
     {
-        this.dataWatcher.updateObject(17, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(17, par1);
     }
 
     /**
@@ -921,7 +919,7 @@ public abstract class EntityMinecart extends Entity
      */
     public void setRollingDirection(int par1)
     {
-        this.dataWatcher.updateObject(18, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(18, par1);
     }
 
     /**
@@ -974,7 +972,7 @@ public abstract class EntityMinecart extends Entity
 
     public void setDisplayTile(int par1)
     {
-        this.getDataWatcher().updateObject(20, Integer.valueOf(par1 & 65535 | this.getDisplayTileData() << 16));
+        this.getDataWatcher().updateObject(20, par1 & 65535 | this.getDisplayTileData() << 16);
         this.setHasDisplayTile(true);
     }
 
@@ -982,13 +980,13 @@ public abstract class EntityMinecart extends Entity
     {
         Block var2 = this.getDisplayTile();
         int var3 = var2 == null ? 0 : var2.blockID;
-        this.getDataWatcher().updateObject(20, Integer.valueOf(var3 & 65535 | par1 << 16));
+        this.getDataWatcher().updateObject(20, var3 & 65535 | par1 << 16);
         this.setHasDisplayTile(true);
     }
 
     public void setDisplayTileOffset(int par1)
     {
-        this.getDataWatcher().updateObject(21, Integer.valueOf(par1));
+        this.getDataWatcher().updateObject(21, par1);
         this.setHasDisplayTile(true);
     }
 
@@ -999,7 +997,7 @@ public abstract class EntityMinecart extends Entity
 
     public void setHasDisplayTile(boolean par1)
     {
-        this.getDataWatcher().updateObject(22, Byte.valueOf((byte)(par1 ? 1 : 0)));
+        this.getDataWatcher().updateObject(22, (byte) (par1 ? 1 : 0));
     }
 
     public void func_96094_a(String par1Str)

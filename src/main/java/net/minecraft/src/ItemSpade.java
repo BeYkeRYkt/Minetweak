@@ -15,6 +15,6 @@ public class ItemSpade extends ItemTool
      */
     public boolean canHarvestBlock(Block par1Block)
     {
-        return par1Block == Block.snow ? true : par1Block == Block.blockSnow;
+        return par1Block == Block.snow || par1Block == Block.blockSnow;
     }
 }

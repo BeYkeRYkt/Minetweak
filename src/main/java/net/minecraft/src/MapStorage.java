@@ -16,15 +16,15 @@ public class MapStorage
     private ISaveHandler saveHandler;
 
     /** Map of item data String id to loaded MapDataBases */
-    private Map loadedDataMap = new HashMap();
+    private Map<String, WorldSavedData> loadedDataMap = new HashMap<String, WorldSavedData>();
 
     /** List of loaded MapDataBases. */
-    private List loadedDataList = new ArrayList();
+    private List<WorldSavedData> loadedDataList = new ArrayList<WorldSavedData>();
 
     /**
      * Map of MapDataBase id String prefixes ('map' etc) to max known unique Short id (the 0 part etc) for that prefix
      */
-    private Map idCounts = new HashMap();
+    private Map<String, Short> idCounts = new HashMap<String, Short>();
 
     public MapStorage(ISaveHandler par1ISaveHandler)
     {
@@ -38,7 +38,7 @@ public class MapStorage
      */
     public WorldSavedData loadData(Class par1Class, String par2Str)
     {
-        WorldSavedData var3 = (WorldSavedData)this.loadedDataMap.get(par2Str);
+        WorldSavedData var3 = this.loadedDataMap.get(par2Str);
 
         if (var3 != null)
         {
@@ -111,12 +111,8 @@ public class MapStorage
      */
     public void saveAllData()
     {
-        for (int var1 = 0; var1 < this.loadedDataList.size(); ++var1)
-        {
-            WorldSavedData var2 = (WorldSavedData)this.loadedDataList.get(var1);
-
-            if (var2.isDirty())
-            {
+        for (WorldSavedData var2 : this.loadedDataList) {
+            if (var2.isDirty()) {
                 this.saveData(var2);
                 var2.setDirty(false);
             }
@@ -173,18 +169,15 @@ public class MapStorage
                 DataInputStream var2 = new DataInputStream(new FileInputStream(var1));
                 NBTTagCompound var3 = CompressedStreamTools.read(var2);
                 var2.close();
-                Iterator var4 = var3.getTags().iterator();
 
-                while (var4.hasNext())
-                {
-                    NBTBase var5 = (NBTBase)var4.next();
+                for (Object o : var3.getTags()) {
+                    NBTBase var5 = (NBTBase) o;
 
-                    if (var5 instanceof NBTTagShort)
-                    {
-                        NBTTagShort var6 = (NBTTagShort)var5;
+                    if (var5 instanceof NBTTagShort) {
+                        NBTTagShort var6 = (NBTTagShort) var5;
                         String var7 = var6.getName();
                         short var8 = var6.data;
-                        this.idCounts.put(var7, Short.valueOf(var8));
+                        this.idCounts.put(var7, var8);
                     }
                 }
             }
@@ -200,22 +193,22 @@ public class MapStorage
      */
     public int getUniqueDataId(String par1Str)
     {
-        Short var2 = (Short)this.idCounts.get(par1Str);
+        Short var2 = this.idCounts.get(par1Str);
 
         if (var2 == null)
         {
-            var2 = Short.valueOf((short)0);
+            var2 = (short) 0;
         }
         else
         {
-            var2 = Short.valueOf((short)(var2.shortValue() + 1));
+            var2 = (short) (var2 + 1);
         }
 
         this.idCounts.put(par1Str, var2);
 
         if (this.saveHandler == null)
         {
-            return var2.shortValue();
+            return var2;
         }
         else
         {
@@ -226,12 +219,9 @@ public class MapStorage
                 if (var3 != null)
                 {
                     NBTTagCompound var4 = new NBTTagCompound();
-                    Iterator var5 = this.idCounts.keySet().iterator();
 
-                    while (var5.hasNext())
-                    {
-                        String var6 = (String)var5.next();
-                        short var7 = ((Short)this.idCounts.get(var6)).shortValue();
+                    for (String var6 : this.idCounts.keySet()) {
+                        short var7 = this.idCounts.get(var6);
                         var4.setShort(var6, var7);
                     }
 
@@ -245,7 +235,7 @@ public class MapStorage
                 var8.printStackTrace();
             }
 
-            return var2.shortValue();
+            return var2;
         }
     }
 }

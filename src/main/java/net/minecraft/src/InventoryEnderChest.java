@@ -20,7 +20,7 @@ public class InventoryEnderChest extends InventoryBasic
 
         for (var2 = 0; var2 < this.getSizeInventory(); ++var2)
         {
-            this.setInventorySlotContents(var2, (ItemStack)null);
+            this.setInventorySlotContents(var2, null);
         }
 
         for (var2 = 0; var2 < par1NBTTagList.tagCount(); ++var2)
@@ -60,7 +60,7 @@ public class InventoryEnderChest extends InventoryBasic
      */
     public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
     {
-        return this.associatedChest != null && !this.associatedChest.isUseableByPlayer(par1EntityPlayer) ? false : super.isUseableByPlayer(par1EntityPlayer);
+        return !(this.associatedChest != null && !this.associatedChest.isUseableByPlayer(par1EntityPlayer)) && super.isUseableByPlayer(par1EntityPlayer);
     }
 
     public void openChest()

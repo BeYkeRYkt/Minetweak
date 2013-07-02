@@ -6,13 +6,7 @@ public class WorldGenSwamp extends WorldGenerator
 {
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {
-        int var6;
-
-        for (var6 = par2Random.nextInt(4) + 5; par1World.getBlockMaterial(par3, par4 - 1, par5) == Material.water; --par4)
-        {
-            ;
-        }
-
+        int var6 = 0;
         boolean var7 = true;
 
         if (par4 >= 1 && par4 + var6 + 1 <= 128)

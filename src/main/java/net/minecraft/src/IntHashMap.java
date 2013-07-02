@@ -3,6 +3,7 @@ package net.minecraft.src;
 import java.util.HashSet;
 import java.util.Set;
 
+@SuppressWarnings({"FieldCanBeLocal", "MismatchedQueryAndUpdateOfCollection"})
 public class IntHashMap
 {
     /** An array of HashEntries representing the heads of hash slot lists */
@@ -16,9 +17,6 @@ public class IntHashMap
 
     /** The scale factor used to determine when to grow the table */
     private final float growFactor = 0.75F;
-
-    /** A serial stamp used to mark changes */
-    private transient volatile int versionStamp;
 
     /** The set of all the keys stored in this MCHash object */
     private Set keySet = new HashSet();
@@ -89,7 +87,7 @@ public class IntHashMap
      */
     public void addKey(int par1, Object par2Obj)
     {
-        this.keySet.add(Integer.valueOf(par1));
+        this.keySet.add(par1);
         int var3 = computeHash(par1);
         int var4 = getSlotIndex(var3, this.slots.length);
 
@@ -102,7 +100,6 @@ public class IntHashMap
             }
         }
 
-        ++this.versionStamp;
         this.insert(var3, par1, par2Obj, var4);
     }
 
@@ -184,7 +181,6 @@ public class IntHashMap
 
             if (var5.hashEntry == par1)
             {
-                ++this.versionStamp;
                 --this.count;
 
                 if (var4 == var5)
@@ -210,7 +206,6 @@ public class IntHashMap
      */
     public void clearMap()
     {
-        ++this.versionStamp;
         IntHashMapEntry[] var1 = this.slots;
 
         for (int var2 = 0; var2 < var1.length; ++var2)

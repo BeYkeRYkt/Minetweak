@@ -30,10 +30,8 @@ public class ItemTool extends Item
      */
     public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block)
     {
-        for (int var3 = 0; var3 < this.blocksEffectiveAgainst.length; ++var3)
-        {
-            if (this.blocksEffectiveAgainst[var3] == par2Block)
-            {
+        for (Block aBlocksEffectiveAgainst : this.blocksEffectiveAgainst) {
+            if (aBlocksEffectiveAgainst == par2Block) {
                 return this.efficiencyOnProperMaterial;
             }
         }
@@ -90,6 +88,6 @@ public class ItemTool extends Item
      */
     public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
     {
-        return this.toolMaterial.getToolCraftingMaterial() == par2ItemStack.itemID ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+        return this.toolMaterial.getToolCraftingMaterial() == par2ItemStack.itemID || super.getIsRepairable(par1ItemStack, par2ItemStack);
     }
 }

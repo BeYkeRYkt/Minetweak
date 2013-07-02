@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+@SuppressWarnings({"FieldCanBeLocal", "UnusedDeclaration"})
 class GameRuleValue
 {
     private String valueString;
@@ -24,18 +25,18 @@ class GameRuleValue
         {
             this.valueInteger = Integer.parseInt(par1Str);
         }
-        catch (NumberFormatException var4)
+        catch (NumberFormatException ignored)
         {
-            ;
+
         }
 
         try
         {
             this.valueDouble = Double.parseDouble(par1Str);
         }
-        catch (NumberFormatException var3)
+        catch (NumberFormatException ignored)
         {
-            ;
+
         }
     }
 

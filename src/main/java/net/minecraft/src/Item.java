@@ -2,6 +2,7 @@ package net.minecraft.src;
 
 import java.util.Random;
 
+@SuppressWarnings({"UnusedDeclaration", "FieldCanBeLocal"})
 public class Item
 {
     private CreativeTabs tabToDisplayOn = null;

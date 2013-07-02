@@ -27,8 +27,6 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
     {
         NBTTagCompound var4 = null;
         ChunkCoordIntPair var5 = new ChunkCoordIntPair(par2, par3);
-        final Object var6;
-        var6 = this.syncLockObject;
 
         synchronized (this.syncLockObject)
         {
@@ -132,7 +130,6 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
     public boolean writeNextIO()
     {
         AnvilChunkLoaderPending var1 = null;
-        Object var2 = this.syncLockObject;
 
         synchronized (this.syncLockObject)
         {
@@ -145,16 +142,13 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
             this.pendingAnvilChunksCoordinates.remove(var1.chunkCoordinate);
         }
 
-        if (var1 != null)
+        try
         {
-            try
-            {
-                this.writeChunkNBTTags(var1);
-            }
-            catch (Exception var4)
-            {
-                var4.printStackTrace();
-            }
+            this.writeChunkNBTTags(var1);
+        }
+        catch (Exception var4)
+        {
+            var4.printStackTrace();
         }
 
         return true;
@@ -184,11 +178,9 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
      */
     public void saveExtraData()
     {
-        if (true) {
-            do {
-                if (!(this.writeNextIO())) break;
-            } while (true);
-        }
+        do {
+            if (!(this.writeNextIO())) break;
+        } while (true);
     }
 
     /**

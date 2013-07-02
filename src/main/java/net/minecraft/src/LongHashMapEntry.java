@@ -41,10 +41,10 @@ class LongHashMapEntry
         else
         {
             LongHashMapEntry var2 = (LongHashMapEntry)par1Obj;
-            Long var3 = Long.valueOf(this.getKey());
-            Long var4 = Long.valueOf(var2.getKey());
+            Long var3 = this.getKey();
+            Long var4 = var2.getKey();
 
-            if (var3 == var4 || var3 != null && var3.equals(var4))
+            if (var3.equals(var4) || var3.equals(var4))
             {
                 Object var5 = this.getValue();
                 Object var6 = var2.getValue();

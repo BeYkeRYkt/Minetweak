@@ -10,24 +10,24 @@ public class IntCache
     /**
      * A list of pre-allocated int[256] arrays that are currently unused and can be returned by getIntCache()
      */
-    private static List freeSmallArrays = new ArrayList();
+    private static List<int[]> freeSmallArrays = new ArrayList<int[]>();
 
     /**
      * A list of pre-allocated int[256] arrays that were previously returned by getIntCache() and which will not be re-
      * used again until resetIntCache() is called.
      */
-    private static List inUseSmallArrays = new ArrayList();
+    private static List<int[]> inUseSmallArrays = new ArrayList<int[]>();
 
     /**
      * A list of pre-allocated int[cacheSize] arrays that are currently unused and can be returned by getIntCache()
      */
-    private static List freeLargeArrays = new ArrayList();
+    private static List<int[]> freeLargeArrays = new ArrayList<int[]>();
 
     /**
      * A list of pre-allocated int[cacheSize] arrays that were previously returned by getIntCache() and which will not
      * be re-used again until resetIntCache() is called.
      */
-    private static List inUseLargeArrays = new ArrayList();
+    private static List<int[]> inUseLargeArrays = new ArrayList<int[]>();
 
     public static synchronized int[] getIntCache(int par0)
     {
@@ -43,7 +43,7 @@ public class IntCache
             }
             else
             {
-                var1 = (int[])freeSmallArrays.remove(freeSmallArrays.size() - 1);
+                var1 = freeSmallArrays.remove(freeSmallArrays.size() - 1);
                 inUseSmallArrays.add(var1);
                 return var1;
             }
@@ -65,7 +65,7 @@ public class IntCache
         }
         else
         {
-            var1 = (int[])freeLargeArrays.remove(freeLargeArrays.size() - 1);
+            var1 = freeLargeArrays.remove(freeLargeArrays.size() - 1);
             inUseLargeArrays.add(var1);
             return var1;
         }

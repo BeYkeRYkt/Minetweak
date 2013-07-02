@@ -113,11 +113,9 @@ public class NBTTagList extends NBTBase
     {
         NBTTagList var1 = new NBTTagList(this.getName());
         var1.tagType = this.tagType;
-        Iterator var2 = this.tagList.iterator();
 
-        while (var2.hasNext())
-        {
-            NBTBase var3 = (NBTBase)var2.next();
+        for (Object aTagList : this.tagList) {
+            NBTBase var3 = (NBTBase) aTagList;
             NBTBase var4 = var3.copy();
             var1.tagList.add(var4);
         }

@@ -121,7 +121,7 @@ public abstract class Packet
      */
     public final int getPacketId()
     {
-        return ((Integer)packetClassToIdMap.get(this.getClass())).intValue();
+        return (Integer) packetClassToIdMap.get(this.getClass());
     }
 
     /**
@@ -282,8 +282,7 @@ public abstract class Packet
 
     public String toString()
     {
-        String var1 = this.getClass().getSimpleName();
-        return var1;
+        return this.getClass().getSimpleName();
     }
 
     /**

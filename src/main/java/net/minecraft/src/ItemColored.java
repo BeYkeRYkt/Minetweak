@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+@SuppressWarnings({"FieldCanBeLocal", "UnusedDeclaration"})
 public class ItemColored extends ItemBlock
 {
     private final Block blockRef;

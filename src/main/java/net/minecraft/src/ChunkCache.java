@@ -128,7 +128,7 @@ public class ChunkCache implements IBlockAccess
     public boolean isBlockNormalCube(int par1, int par2, int par3)
     {
         Block var4 = Block.blocksList[this.getBlockId(par1, par2, par3)];
-        return var4 == null ? false : var4.blockMaterial.blocksMovement() && var4.renderAsNormalBlock();
+        return var4 != null && var4.blockMaterial.blocksMovement() && var4.renderAsNormalBlock();
     }
 
     /**

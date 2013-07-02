@@ -14,7 +14,6 @@ public class ItemPotion extends Item
      * recalculating it).
      */
     private HashMap effectCache = new HashMap();
-    private static final Map field_77835_b = new LinkedHashMap();
 
     public ItemPotion(int par1)
     {
@@ -50,7 +49,7 @@ public class ItemPotion extends Item
             if (var2 == null)
             {
                 var2 = PotionHelper.getPotionEffects(par1ItemStack.getItemDamage(), false);
-                this.effectCache.put(Integer.valueOf(par1ItemStack.getItemDamage()), var2);
+                this.effectCache.put(par1ItemStack.getItemDamage(), var2);
             }
 
             return var2;
@@ -67,7 +66,7 @@ public class ItemPotion extends Item
         if (var2 == null)
         {
             var2 = PotionHelper.getPotionEffects(par1, false);
-            this.effectCache.put(Integer.valueOf(par1), var2);
+            this.effectCache.put(par1, var2);
         }
 
         return var2;
@@ -86,11 +85,9 @@ public class ItemPotion extends Item
 
             if (var4 != null)
             {
-                Iterator var5 = var4.iterator();
 
-                while (var5.hasNext())
-                {
-                    PotionEffect var6 = (PotionEffect)var5.next();
+                for (Object aVar4 : var4) {
+                    PotionEffect var6 = (PotionEffect) aVar4;
                     par3EntityPlayer.addPotionEffect(new PotionEffect(var6));
                 }
             }
@@ -163,7 +160,7 @@ public class ItemPotion extends Item
     }
 
     /**
-     * returns wether or not a potion is a throwable splash potion based on damage value
+     * returns whether or not a potion is a throwable splash potion based on damage value
      */
     public static boolean isSplash(int par0)
     {

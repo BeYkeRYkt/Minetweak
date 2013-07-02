@@ -1,7 +1,5 @@
 package net.minecraft.src;
 
-import java.util.Iterator;
-
 public class EntityItem extends Entity
 {
     /**
@@ -132,11 +130,9 @@ public class EntityItem extends Entity
      */
     private void searchForOtherItemsNearby()
     {
-        Iterator var1 = this.worldObj.getEntitiesWithinAABB(EntityItem.class, this.boundingBox.expand(0.5D, 0.0D, 0.5D)).iterator();
 
-        while (var1.hasNext())
-        {
-            EntityItem var2 = (EntityItem)var1.next();
+        for (Object o : this.worldObj.getEntitiesWithinAABB(EntityItem.class, this.boundingBox.expand(0.5D, 0.0D, 0.5D))) {
+            EntityItem var2 = (EntityItem) o;
             this.combineItems(var2);
         }
     }

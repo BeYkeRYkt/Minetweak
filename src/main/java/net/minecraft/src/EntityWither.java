@@ -2,6 +2,7 @@ package net.minecraft.src;
 
 import java.util.List;
 
+@SuppressWarnings("MismatchedReadAndWriteOfArray")
 public class EntityWither extends EntityMob implements IRangedAttackMob
 {
     private float[] field_82220_d = new float[2];
@@ -37,11 +38,11 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(16, new Integer(100));
-        this.dataWatcher.addObject(17, new Integer(0));
-        this.dataWatcher.addObject(18, new Integer(0));
-        this.dataWatcher.addObject(19, new Integer(0));
-        this.dataWatcher.addObject(20, new Integer(0));
+        this.dataWatcher.addObject(16, 100);
+        this.dataWatcher.addObject(17, 0);
+        this.dataWatcher.addObject(18, 0);
+        this.dataWatcher.addObject(19, 0);
+        this.dataWatcher.addObject(20, 0);
     }
 
     /**
@@ -60,7 +61,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
     {
         super.readEntityFromNBT(par1NBTTagCompound);
         this.func_82215_s(par1NBTTagCompound.getInteger("Invul"));
-        this.dataWatcher.updateObject(16, Integer.valueOf(this.health));
+        this.dataWatcher.updateObject(16, this.health);
     }
 
     /**
@@ -95,7 +96,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
     {
         if (!this.worldObj.isRemote)
         {
-            this.dataWatcher.updateObject(16, Integer.valueOf(this.health));
+            this.dataWatcher.updateObject(16, this.health);
         }
 
         this.motionY *= 0.6000000238418579D;
@@ -341,7 +342,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
 
                     if (var18)
                     {
-                        this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1012, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
+                        this.worldObj.playAuxSFXAtEntity(null, 1012, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
                     }
                 }
             }
@@ -429,7 +430,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
 
     private void func_82209_a(int par1, double par2, double par4, double par6, boolean par8)
     {
-        this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1014, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
+        this.worldObj.playAuxSFXAtEntity(null, 1014, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
         double var9 = this.func_82214_u(par1);
         double var11 = this.func_82208_v(par1);
         double var13 = this.func_82213_w(par1);
@@ -573,7 +574,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
 
     public void func_82215_s(int par1)
     {
-        this.dataWatcher.updateObject(20, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(20, par1);
     }
 
     /**
@@ -586,7 +587,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
 
     public void func_82211_c(int par1, int par2)
     {
-        this.dataWatcher.updateObject(17 + par1, Integer.valueOf(par2));
+        this.dataWatcher.updateObject(17 + par1, par2);
     }
 
     /**

@@ -269,7 +269,7 @@ public abstract class World implements IBlockAccess
                 {
                     CrashReport var6 = CrashReport.makeCrashReport(var8, "Exception getting block type in world");
                     CrashReportCategory var7 = var6.makeCategory("Requested block coordinates");
-                    var7.addCrashSection("Found chunk", Boolean.valueOf(var4 == null));
+                    var7.addCrashSection("Found chunk", var4 == null);
                     var7.addCrashSection("Location", CrashReportCategory.getLocationInfo(par1, par2, par3));
                     throw new ReportedException(var6);
                 }
@@ -312,7 +312,7 @@ public abstract class World implements IBlockAccess
      */
     public boolean blockExists(int par1, int par2, int par3)
     {
-        return par2 >= 0 && par2 < 256 ? this.chunkExists(par1 >> 4, par3 >> 4) : false;
+        return par2 >= 0 && par2 < 256 && this.chunkExists(par1 >> 4, par3 >> 4);
     }
 
     /**
@@ -929,9 +929,8 @@ public abstract class World implements IBlockAccess
                         Chunk var6 = this.getChunkFromChunkCoords(par2 >> 4, par4 >> 4);
                         var6.setLightValue(par1EnumSkyBlock, par2 & 15, par3, par4 & 15, par5);
 
-                        for (int var7 = 0; var7 < this.worldAccesses.size(); ++var7)
-                        {
-                            ((IWorldAccess)this.worldAccesses.get(var7)).markBlockForRenderUpdate(par2, par3, par4);
+                        for (Object worldAccess : this.worldAccesses) {
+                            ((IWorldAccess) worldAccess).markBlockForRenderUpdate(par2, par3, par4);
                         }
                     }
                 }
@@ -1245,9 +1244,8 @@ public abstract class World implements IBlockAccess
      */
     public void playRecord(String par1Str, int par2, int par3, int par4)
     {
-        for (int var5 = 0; var5 < this.worldAccesses.size(); ++var5)
-        {
-            ((IWorldAccess)this.worldAccesses.get(var5)).playRecord(par1Str, par2, par3, par4);
+        for (Object worldAccess : this.worldAccesses) {
+            ((IWorldAccess) worldAccess).playRecord(par1Str, par2, par3, par4);
         }
     }
 

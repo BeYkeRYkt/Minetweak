@@ -5,7 +5,7 @@ import java.util.List;
 
 public class MapGenNetherBridge extends MapGenStructure
 {
-    private List spawnList = new ArrayList();
+    private List<SpawnListEntry> spawnList = new ArrayList<SpawnListEntry>();
 
     public MapGenNetherBridge()
     {
@@ -15,7 +15,7 @@ public class MapGenNetherBridge extends MapGenStructure
         this.spawnList.add(new SpawnListEntry(EntityMagmaCube.class, 3, 4, 4));
     }
 
-    public List getSpawnList()
+    public List<SpawnListEntry> getSpawnList()
     {
         return this.spawnList;
     }
@@ -26,7 +26,7 @@ public class MapGenNetherBridge extends MapGenStructure
         int var4 = par2 >> 4;
         this.rand.setSeed((long)(var3 ^ var4 << 4) ^ this.worldObj.getSeed());
         this.rand.nextInt();
-        return this.rand.nextInt(3) != 0 ? false : (par1 != (var3 << 4) + 4 + this.rand.nextInt(8) ? false : par2 == (var4 << 4) + 4 + this.rand.nextInt(8));
+        return this.rand.nextInt(3) == 0 && (par1 == (var3 << 4) + 4 + this.rand.nextInt(8) && par2 == (var4 << 4) + 4 + this.rand.nextInt(8));
     }
 
     protected StructureStart getStructureStart(int par1, int par2)

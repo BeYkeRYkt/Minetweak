@@ -28,9 +28,9 @@ public class EntityEnderman extends EntityMob
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(16, new Byte((byte)0));
-        this.dataWatcher.addObject(17, new Byte((byte)0));
-        this.dataWatcher.addObject(18, new Byte((byte)0));
+        this.dataWatcher.addObject(16, (byte) 0);
+        this.dataWatcher.addObject(17, (byte) 0);
+        this.dataWatcher.addObject(18, (byte) 0);
     }
 
     /**
@@ -106,7 +106,7 @@ public class EntityEnderman extends EntityMob
             double var5 = var4.lengthVector();
             var4 = var4.normalize();
             double var7 = var3.dotProduct(var4);
-            return var7 > 1.0D - 0.025D / var5 ? par1EntityPlayer.canEntityBeSeen(this) : false;
+            return var7 > 1.0D - 0.025D / var5 && par1EntityPlayer.canEntityBeSeen(this);
         }
     }
 
@@ -386,7 +386,7 @@ public class EntityEnderman extends EntityMob
      */
     public void setCarried(int par1)
     {
-        this.dataWatcher.updateObject(16, Byte.valueOf((byte)(par1 & 255)));
+        this.dataWatcher.updateObject(16, (byte) (par1 & 255));
     }
 
     /**
@@ -402,7 +402,7 @@ public class EntityEnderman extends EntityMob
      */
     public void setCarryingData(int par1)
     {
-        this.dataWatcher.updateObject(17, Byte.valueOf((byte)(par1 & 255)));
+        this.dataWatcher.updateObject(17, (byte) (par1 & 255));
     }
 
     /**
@@ -459,7 +459,7 @@ public class EntityEnderman extends EntityMob
 
     public void setScreaming(boolean par1)
     {
-        this.dataWatcher.updateObject(18, Byte.valueOf((byte)(par1 ? 1 : 0)));
+        this.dataWatcher.updateObject(18, (byte) (par1 ? 1 : 0));
     }
 
     /**

@@ -138,7 +138,7 @@ public abstract class EntityHanging extends Entity
             int var1 = Math.max(1, this.func_82329_d() / 16);
             int var2 = Math.max(1, this.func_82330_g() / 16);
             int var3 = this.xPosition;
-            int var4 = this.yPosition;
+            int var4;
             int var5 = this.zPosition;
 
             if (this.hangingDirection == 2)
@@ -214,7 +214,7 @@ public abstract class EntityHanging extends Entity
 
     public boolean func_85031_j(Entity par1Entity)
     {
-        return par1Entity instanceof EntityPlayer ? this.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)par1Entity), 0) : false;
+        return par1Entity instanceof EntityPlayer && this.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par1Entity), 0);
     }
 
     /**

@@ -58,7 +58,7 @@ public class EntityAIWatchClosest extends EntityAIBase
      */
     public boolean continueExecuting()
     {
-        return !this.closestEntity.isEntityAlive() ? false : (this.theWatcher.getDistanceSqToEntity(this.closestEntity) > (double)(this.field_75333_c * this.field_75333_c) ? false : this.lookTime > 0);
+        return this.closestEntity.isEntityAlive() && (this.theWatcher.getDistanceSqToEntity(this.closestEntity) <= (double) (this.field_75333_c * this.field_75333_c) && this.lookTime > 0);
     }
 
     /**

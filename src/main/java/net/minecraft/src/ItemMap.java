@@ -48,7 +48,7 @@ public class ItemMap extends ItemMapBase
                 var11 /= 2;
             }
 
-            MapInfo var12 = par3MapData.func_82568_a((EntityPlayer)par2Entity);
+            MapInfo var12 = par3MapData.addPlayerMapInfo((EntityPlayer) par2Entity);
             ++var12.field_82569_d;
 
             for (int var13 = var9 - var11 + 1; var13 < var9 + var11; ++var13)
@@ -142,7 +142,6 @@ public class ItemMap extends ItemMapBase
                                                 if (var33 > 0 && var34 != 0 && Block.blocksList[var34].blockMaterial.isLiquid())
                                                 {
                                                     var36 = var33 - 1;
-                                                    boolean var37 = false;
                                                     int var43;
 
                                                     do

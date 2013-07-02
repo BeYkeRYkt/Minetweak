@@ -119,9 +119,9 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
-        this.dataWatcher.addObject(17, Byte.valueOf((byte)0));
-        this.dataWatcher.addObject(18, Integer.valueOf(0));
+        this.dataWatcher.addObject(16, (byte) 0);
+        this.dataWatcher.addObject(17, (byte) 0);
+        this.dataWatcher.addObject(18, 0);
     }
 
     /**
@@ -511,7 +511,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
      */
     public void setScore(int par1)
     {
-        this.dataWatcher.updateObject(18, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(18, par1);
     }
 
     /**
@@ -520,7 +520,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
     public void addScore(int par1)
     {
         int var2 = this.getScore();
-        this.dataWatcher.updateObject(18, Integer.valueOf(var2 + par1));
+        this.dataWatcher.updateObject(18, var2 + par1);
     }
 
     /**
@@ -888,7 +888,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
     {
         ScorePlayerTeam var2 = this.getTeam();
         ScorePlayerTeam var3 = par1EntityPlayer.getTeam();
-        return var2 != var3 ? true : (var2 != null ? var2.func_96665_g() : true);
+        return var2 != var3 || (var2 != null ? var2.func_96665_g() : true);
     }
 
     /**
@@ -1059,7 +1059,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
      */
     public void destroyCurrentEquippedItem()
     {
-        this.inventory.setInventorySlotContents(this.inventory.currentItem, (ItemStack)null);
+        this.inventory.setInventorySlotContents(this.inventory.currentItem, null);
     }
 
     /**

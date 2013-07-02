@@ -14,10 +14,10 @@ public class WorldServer extends World
     private final MinecraftServer mcServer;
     private final EntityTracker theEntityTracker;
     private final PlayerManager thePlayerManager;
-    private Set field_73064_N;
+    private Set<NextTickListEntry> field_73064_N;
 
     /** All work to do in future ticks. */
-    private TreeSet pendingTickListEntries;
+    private TreeSet<NextTickListEntry> pendingTickListEntries;
     public ChunkProviderServer theChunkProviderServer;
 
     /** Whether or not level saving is enabled */
@@ -39,7 +39,7 @@ public class WorldServer extends World
      */
     private int blockEventCacheIndex = 0;
     private static final WeightedRandomChestContent[] bonusChestContent = new WeightedRandomChestContent[] {new WeightedRandomChestContent(Item.stick.itemID, 0, 1, 3, 10), new WeightedRandomChestContent(Block.planks.blockID, 0, 1, 3, 10), new WeightedRandomChestContent(Block.wood.blockID, 0, 1, 3, 10), new WeightedRandomChestContent(Item.axeStone.itemID, 0, 1, 1, 3), new WeightedRandomChestContent(Item.axeWood.itemID, 0, 1, 1, 5), new WeightedRandomChestContent(Item.pickaxeStone.itemID, 0, 1, 1, 3), new WeightedRandomChestContent(Item.pickaxeWood.itemID, 0, 1, 1, 5), new WeightedRandomChestContent(Item.appleRed.itemID, 0, 2, 3, 5), new WeightedRandomChestContent(Item.bread.itemID, 0, 2, 3, 3)};
-    private ArrayList field_94579_S = new ArrayList();
+    private ArrayList<NextTickListEntry> field_94579_S = new ArrayList<NextTickListEntry>();
 
     /** An IntHashMap of entity IDs (integers) to their Entity objects. */
     private IntHashMap entityIdMap;
@@ -58,12 +58,12 @@ public class WorldServer extends World
 
         if (this.field_73064_N == null)
         {
-            this.field_73064_N = new HashSet();
+            this.field_73064_N = new HashSet<NextTickListEntry>();
         }
 
         if (this.pendingTickListEntries == null)
         {
-            this.pendingTickListEntries = new TreeSet();
+            this.pendingTickListEntries = new TreeSet<NextTickListEntry>();
         }
 
         this.field_85177_Q = new Teleporter(this);
@@ -98,17 +98,9 @@ public class WorldServer extends World
         {
             boolean var1 = false;
 
-            if (this.spawnHostileMobs && this.difficultySetting >= 1)
-            {
-                ;
-            }
-
-            if (!var1)
-            {
-                long var2 = this.worldInfo.getWorldTime() + 24000L;
-                this.worldInfo.setWorldTime(var2 - var2 % 24000L);
-                this.wakeAllPlayers();
-            }
+            long var2 = this.worldInfo.getWorldTime() + 24000L;
+            this.worldInfo.setWorldTime(var2 - var2 % 24000L);
+            this.wakeAllPlayers();
         }
 
         this.theProfiler.startSection("mobSpawner");
@@ -466,7 +458,7 @@ public class WorldServer extends World
 
             for (int var3 = 0; var3 < var2; ++var3)
             {
-                var4 = (NextTickListEntry)this.pendingTickListEntries.first();
+                var4 = this.pendingTickListEntries.first();
 
                 if (!par1 && var4.scheduledTime > this.worldInfo.getWorldTotalTime())
                 {
@@ -480,11 +472,11 @@ public class WorldServer extends World
 
             this.theProfiler.endSection();
             this.theProfiler.startSection("ticking");
-            Iterator var14 = this.field_94579_S.iterator();
+            Iterator<NextTickListEntry> var14 = this.field_94579_S.iterator();
 
             while (var14.hasNext())
             {
-                var4 = (NextTickListEntry)var14.next();
+                var4 = var14.next();
                 var14.remove();
                 byte var5 = 0;
 
@@ -532,7 +524,7 @@ public class WorldServer extends World
 
     public List getPendingBlockUpdates(Chunk par1Chunk, boolean par2)
     {
-        ArrayList var3 = null;
+        ArrayList<NextTickListEntry> var3 = null;
         ChunkCoordIntPair var4 = par1Chunk.getChunkCoordIntPair();
         int var5 = (var4.chunkXPos << 4) - 2;
         int var6 = var5 + 16 + 2;
@@ -541,7 +533,7 @@ public class WorldServer extends World
 
         for (int var9 = 0; var9 < 2; ++var9)
         {
-            Iterator var10;
+            Iterator<NextTickListEntry> var10;
 
             if (var9 == 0)
             {
@@ -559,7 +551,7 @@ public class WorldServer extends World
 
             while (var10.hasNext())
             {
-                NextTickListEntry var11 = (NextTickListEntry)var10.next();
+                NextTickListEntry var11 = var10.next();
 
                 if (var11.xCoord >= var5 && var11.xCoord < var6 && var11.zCoord >= var7 && var11.zCoord < var8)
                 {
@@ -571,7 +563,7 @@ public class WorldServer extends World
 
                     if (var3 == null)
                     {
-                        var3 = new ArrayList();
+                        var3 = new ArrayList<NextTickListEntry>();
                     }
 
                     var3.add(var11);
@@ -625,16 +617,14 @@ public class WorldServer extends World
     /**
      * get a list of tileEntity's
      */
-    public List getTileEntityList(int par1, int par2, int par3, int par4, int par5, int par6)
+    public List<TileEntity> getTileEntityList(int par1, int par2, int par3, int par4, int par5, int par6)
     {
-        ArrayList var7 = new ArrayList();
+        ArrayList<TileEntity> var7 = new ArrayList<TileEntity>();
 
-        for (int var8 = 0; var8 < this.loadedTileEntityList.size(); ++var8)
-        {
-            TileEntity var9 = (TileEntity)this.loadedTileEntityList.get(var8);
+        for (Object aLoadedTileEntityList : this.loadedTileEntityList) {
+            TileEntity var9 = (TileEntity) aLoadedTileEntityList;
 
-            if (var9.xCoord >= par1 && var9.yCoord >= par2 && var9.zCoord >= par3 && var9.xCoord < par4 && var9.yCoord < par5 && var9.zCoord < par6)
-            {
+            if (var9.xCoord >= par1 && var9.yCoord >= par2 && var9.zCoord >= par3 && var9.xCoord < par4 && var9.yCoord < par5 && var9.zCoord < par6) {
                 var7.add(var9);
             }
         }
@@ -659,12 +649,12 @@ public class WorldServer extends World
 
         if (this.field_73064_N == null)
         {
-            this.field_73064_N = new HashSet();
+            this.field_73064_N = new HashSet<NextTickListEntry>();
         }
 
         if (this.pendingTickListEntries == null)
         {
-            this.pendingTickListEntries = new TreeSet();
+            this.pendingTickListEntries = new TreeSet<NextTickListEntry>();
         }
 
         this.createSpawnPosition(par1WorldSettings);
@@ -805,9 +795,8 @@ public class WorldServer extends World
 
         if (var2 != null)
         {
-            for (int var3 = 0; var3 < var2.length; ++var3)
-            {
-                this.entityIdMap.addKey(var2[var3].entityId, var2[var3]);
+            for (Entity aVar2 : var2) {
+                this.entityIdMap.addKey(aVar2.entityId, aVar2);
             }
         }
     }
@@ -823,9 +812,8 @@ public class WorldServer extends World
 
         if (var2 != null)
         {
-            for (int var3 = 0; var3 < var2.length; ++var3)
-            {
-                this.entityIdMap.removeObject(var2[var3].entityId);
+            for (Entity aVar2 : var2) {
+                this.entityIdMap.removeObject(aVar2.entityId);
             }
         }
     }
@@ -887,7 +875,7 @@ public class WorldServer extends World
 
             if (var13.getDistanceSq(par2, par4, par6) < 4096.0D)
             {
-                ((EntityPlayerMP)var13).playerNetServerHandler.sendPacket(new Packet60Explosion(par2, par4, par6, par8, var11.affectedBlockPositions, (Vec3)var11.func_77277_b().get(var13)));
+                ((EntityPlayerMP)var13).playerNetServerHandler.sendPacket(new Packet60Explosion(par2, par4, par6, par8, var11.affectedBlockPositions, var11.func_77277_b().get(var13)));
             }
         }
 

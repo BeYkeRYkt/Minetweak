@@ -3,7 +3,6 @@ package net.minecraft.src;
 public class ItemSkull extends Item
 {
     private static final String[] skullTypes = new String[] {"skeleton", "wither", "zombie", "char", "creeper"};
-    public static final String[] field_94587_a = new String[] {"skull_skeleton", "skull_wither", "skull_zombie", "skull_char", "skull_creeper"};
 
     public ItemSkull(int par1)
     {
@@ -120,6 +119,6 @@ public class ItemSkull extends Item
 
     public String getItemDisplayName(ItemStack par1ItemStack)
     {
-        return par1ItemStack.getItemDamage() == 3 && par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("SkullOwner") ? StatCollector.translateToLocalFormatted("item.skull.player.name", new Object[] {par1ItemStack.getTagCompound().getString("SkullOwner")}): super.getItemDisplayName(par1ItemStack);
+        return par1ItemStack.getItemDamage() == 3 && par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("SkullOwner") ? StatCollector.translateToLocalFormatted("item.skull.player.name", par1ItemStack.getTagCompound().getString("SkullOwner")): super.getItemDisplayName(par1ItemStack);
     }
 }

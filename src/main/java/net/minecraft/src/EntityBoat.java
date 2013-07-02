@@ -34,9 +34,9 @@ public class EntityBoat extends Entity
 
     protected void entityInit()
     {
-        this.dataWatcher.addObject(17, new Integer(0));
-        this.dataWatcher.addObject(18, new Integer(1));
-        this.dataWatcher.addObject(19, new Integer(0));
+        this.dataWatcher.addObject(17, 0);
+        this.dataWatcher.addObject(18, 1);
+        this.dataWatcher.addObject(19, 0);
     }
 
     /**
@@ -157,7 +157,7 @@ public class EntityBoat extends Entity
 
         for (int var4 = 0; var4 < var1; ++var4)
         {
-            double var5 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(var4 + 0) / (double)var1 - 0.125D;
+            double var5 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(var4) / (double)var1 - 0.125D;
             double var7 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(var4 + 1) / (double)var1 - 0.125D;
             AxisAlignedBB var9 = AxisAlignedBB.getAABBPool().getAABB(this.boundingBox.minX, var5, this.boundingBox.minZ, this.boundingBox.maxX, var7, this.boundingBox.maxZ);
 
@@ -437,7 +437,7 @@ public class EntityBoat extends Entity
      */
     public void setDamageTaken(int par1)
     {
-        this.dataWatcher.updateObject(19, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(19, par1);
     }
 
     /**
@@ -453,7 +453,7 @@ public class EntityBoat extends Entity
      */
     public void setTimeSinceHit(int par1)
     {
-        this.dataWatcher.updateObject(17, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(17, par1);
     }
 
     /**
@@ -469,7 +469,7 @@ public class EntityBoat extends Entity
      */
     public void setForwardDirection(int par1)
     {
-        this.dataWatcher.updateObject(18, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(18, par1);
     }
 
     /**

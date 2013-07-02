@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 public enum EnumChatFormatting
 {
     BLACK('0'),
@@ -30,8 +31,8 @@ public enum EnumChatFormatting
     UNDERLINE('n', true),
     ITALIC('o', true),
     RESET('r');
-    private static final Map field_96321_w = new HashMap();
-    private static final Map field_96331_x = new HashMap();
+    private static final Map<Character, EnumChatFormatting> field_96321_w = new HashMap<Character, EnumChatFormatting>();
+    private static final Map<CharSequence, EnumChatFormatting> field_96331_x = new HashMap<CharSequence, EnumChatFormatting>();
     private static final Pattern field_96330_y = Pattern.compile("(?i)" + String.valueOf('\u00a7') + "[0-9A-FK-OR]");
     private final char field_96329_z;
     private final boolean field_96303_A;
@@ -76,21 +77,17 @@ public enum EnumChatFormatting
 
     public static EnumChatFormatting func_96300_b(String par0Str)
     {
-        return par0Str == null ? null : (EnumChatFormatting)field_96331_x.get(par0Str.toLowerCase());
+        return par0Str == null ? null : field_96331_x.get(par0Str.toLowerCase());
     }
 
-    public static Collection func_96296_a(boolean par0, boolean par1)
+    public static Collection<CharSequence> func_96296_a(boolean par0, boolean par1)
     {
-        ArrayList var2 = new ArrayList();
+        ArrayList<CharSequence> var2 = new ArrayList<CharSequence>();
         EnumChatFormatting[] var3 = values();
         int var4 = var3.length;
 
-        for (int var5 = 0; var5 < var4; ++var5)
-        {
-            EnumChatFormatting var6 = var3[var5];
-
-            if ((!var6.func_96302_c() || par0) && (!var6.func_96301_b() || par1))
-            {
+        for (EnumChatFormatting var6 : var3) {
+            if ((!var6.func_96302_c() || par0) && (!var6.func_96301_b() || par1)) {
                 var2.add(var6.func_96297_d());
             }
         }
@@ -105,7 +102,7 @@ public enum EnumChatFormatting
         for (int var2 = 0; var2 < var1; ++var2)
         {
             EnumChatFormatting var3 = var0[var2];
-            field_96321_w.put(Character.valueOf(var3.func_96298_a()), var3);
+            field_96321_w.put(var3.func_96298_a(), var3);
             field_96331_x.put(var3.func_96297_d(), var3);
         }
     }

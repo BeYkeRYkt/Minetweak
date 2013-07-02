@@ -89,11 +89,11 @@ public class EntityBat extends EntityAmbientCreature
 
         if (par1)
         {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 1)));
+            this.dataWatcher.updateObject(16, (byte) (var2 | 1));
         }
         else
         {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -2)));
+            this.dataWatcher.updateObject(16, (byte) (var2 & -2));
         }
     }
 
@@ -232,7 +232,7 @@ public class EntityBat extends EntityAmbientCreature
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.readEntityFromNBT(par1NBTTagCompound);
-        this.dataWatcher.updateObject(16, Byte.valueOf(par1NBTTagCompound.getByte("BatFlags")));
+        this.dataWatcher.updateObject(16, par1NBTTagCompound.getByte("BatFlags"));
     }
 
     /**
@@ -275,7 +275,7 @@ public class EntityBat extends EntityAmbientCreature
                 var5 = 7;
             }
 
-            return var4 > this.rand.nextInt(var5) ? false : super.getCanSpawnHere();
+            return var4 <= this.rand.nextInt(var5) && super.getCanSpawnHere();
         }
     }
 

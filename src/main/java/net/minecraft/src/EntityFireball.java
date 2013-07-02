@@ -111,22 +111,18 @@ public abstract class EntityFireball extends Entity
             List var5 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
             double var6 = 0.0D;
 
-            for (int var8 = 0; var8 < var5.size(); ++var8)
-            {
-                Entity var9 = (Entity)var5.get(var8);
+            for (Object aVar5 : var5) {
+                Entity var9 = (Entity) aVar5;
 
-                if (var9.canBeCollidedWith() && (!var9.isEntityEqual(this.shootingEntity) || this.ticksInAir >= 25))
-                {
+                if (var9.canBeCollidedWith() && (!var9.isEntityEqual(this.shootingEntity) || this.ticksInAir >= 25)) {
                     float var10 = 0.3F;
-                    AxisAlignedBB var11 = var9.boundingBox.expand((double)var10, (double)var10, (double)var10);
+                    AxisAlignedBB var11 = var9.boundingBox.expand((double) var10, (double) var10, (double) var10);
                     MovingObjectPosition var12 = var11.calculateIntercept(var15, var2);
 
-                    if (var12 != null)
-                    {
+                    if (var12 != null) {
                         double var13 = var15.distanceTo(var12.hitVec);
 
-                        if (var13 < var6 || var6 == 0.0D)
-                        {
+                        if (var13 < var6 || var6 == 0.0D) {
                             var4 = var9;
                             var6 = var13;
                         }
@@ -219,7 +215,7 @@ public abstract class EntityFireball extends Entity
         par1NBTTagCompound.setShort("zTile", (short)this.zTile);
         par1NBTTagCompound.setByte("inTile", (byte)this.inTile);
         par1NBTTagCompound.setByte("inGround", (byte)(this.inGround ? 1 : 0));
-        par1NBTTagCompound.setTag("direction", this.newDoubleNBTList(new double[] {this.motionX, this.motionY, this.motionZ}));
+        par1NBTTagCompound.setTag("direction", this.newDoubleNBTList(this.motionX, this.motionY, this.motionZ));
     }
 
     /**

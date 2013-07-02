@@ -13,6 +13,7 @@ public class MapGenBase
     /** This world object. */
     protected World worldObj;
 
+    @SuppressWarnings("UnusedParameters")
     public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, byte[] par5ArrayOfByte)
     {
         int var6 = this.range;

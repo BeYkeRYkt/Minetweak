@@ -3,6 +3,7 @@ package net.minecraft.src;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+@SuppressWarnings("unchecked")
 public class EntityFallingSand extends Entity
 {
     public int blockID;
@@ -129,7 +130,7 @@ public class EntityFallingSand extends Entity
                     {
                         this.setDead();
 
-                        if (!this.isBreakingAnvil && this.worldObj.canPlaceEntityOnSide(this.blockID, var1, var2, var3, true, 1, (Entity)null, (ItemStack)null) && !BlockSand.canFallBelow(this.worldObj, var1, var2 - 1, var3) && this.worldObj.setBlock(var1, var2, var3, this.blockID, this.metadata, 3))
+                        if (!this.isBreakingAnvil && this.worldObj.canPlaceEntityOnSide(this.blockID, var1, var2, var3, true, 1, null, null) && !BlockSand.canFallBelow(this.worldObj, var1, var2 - 1, var3) && this.worldObj.setBlock(var1, var2, var3, this.blockID, this.metadata, 3))
                         {
                             if (Block.blocksList[this.blockID] instanceof BlockSand)
                             {
@@ -144,14 +145,11 @@ public class EntityFallingSand extends Entity
                                 {
                                     NBTTagCompound var5 = new NBTTagCompound();
                                     var4.writeToNBT(var5);
-                                    Iterator var6 = this.fallingBlockTileEntityData.getTags().iterator();
 
-                                    while (var6.hasNext())
-                                    {
-                                        NBTBase var7 = (NBTBase)var6.next();
+                                    for (Object o : this.fallingBlockTileEntityData.getTags()) {
+                                        NBTBase var7 = (NBTBase) o;
 
-                                        if (!var7.getName().equals("x") && !var7.getName().equals("y") && !var7.getName().equals("z"))
-                                        {
+                                        if (!var7.getName().equals("x") && !var7.getName().equals("y") && !var7.getName().equals("z")) {
                                             var5.setTag(var7.getName(), var7.copy());
                                         }
                                     }
@@ -193,12 +191,10 @@ public class EntityFallingSand extends Entity
             {
                 ArrayList var3 = new ArrayList(this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox));
                 DamageSource var4 = this.blockID == Block.anvil.blockID ? DamageSource.anvil : DamageSource.fallingBlock;
-                Iterator var5 = var3.iterator();
 
-                while (var5.hasNext())
-                {
-                    Entity var6 = (Entity)var5.next();
-                    var6.attackEntityFrom(var4, Math.min(MathHelper.floor_float((float)var2 * this.fallHurtAmount), this.fallHurtMax));
+                for (Object aVar3 : var3) {
+                    Entity var6 = (Entity) aVar3;
+                    var6.attackEntityFrom(var4, Math.min(MathHelper.floor_float((float) var2 * this.fallHurtAmount), this.fallHurtMax));
                 }
 
                 if (this.blockID == Block.anvil.blockID && (double)this.rand.nextFloat() < 0.05000000074505806D + (double)var2 * 0.05D)
@@ -292,7 +288,7 @@ public class EntityFallingSand extends Entity
     public void func_85029_a(CrashReportCategory par1CrashReportCategory)
     {
         super.func_85029_a(par1CrashReportCategory);
-        par1CrashReportCategory.addCrashSection("Immitating block ID", Integer.valueOf(this.blockID));
-        par1CrashReportCategory.addCrashSection("Immitating block data", Integer.valueOf(this.metadata));
+        par1CrashReportCategory.addCrashSection("Immitating block ID", this.blockID);
+        par1CrashReportCategory.addCrashSection("Immitating block data", this.metadata);
     }
 }

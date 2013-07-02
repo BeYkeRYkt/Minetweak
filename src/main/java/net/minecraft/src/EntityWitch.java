@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class EntityWitch extends EntityMob implements IRangedAttackMob
@@ -31,7 +30,7 @@ public class EntityWitch extends EntityMob implements IRangedAttackMob
     protected void entityInit()
     {
         super.entityInit();
-        this.getDataWatcher().addObject(21, Byte.valueOf((byte)0));
+        this.getDataWatcher().addObject(21, (byte) 0);
     }
 
     /**
@@ -63,7 +62,7 @@ public class EntityWitch extends EntityMob implements IRangedAttackMob
      */
     public void setAggressive(boolean par1)
     {
-        this.getDataWatcher().updateObject(21, Byte.valueOf((byte)(par1 ? 1 : 0)));
+        this.getDataWatcher().updateObject(21, (byte) (par1 ? 1 : 0));
     }
 
     /**
@@ -101,7 +100,7 @@ public class EntityWitch extends EntityMob implements IRangedAttackMob
                 {
                     this.setAggressive(false);
                     ItemStack var1 = this.getHeldItem();
-                    this.setCurrentItemOrArmor(0, (ItemStack)null);
+                    this.setCurrentItemOrArmor(0, null);
 
                     if (var1 != null && var1.itemID == Item.potion.itemID)
                     {
@@ -109,11 +108,9 @@ public class EntityWitch extends EntityMob implements IRangedAttackMob
 
                         if (var2 != null)
                         {
-                            Iterator var3 = var2.iterator();
 
-                            while (var3.hasNext())
-                            {
-                                PotionEffect var4 = (PotionEffect)var3.next();
+                            for (Object aVar2 : var2) {
+                                PotionEffect var4 = (PotionEffect) aVar2;
                                 this.addPotionEffect(new PotionEffect(var4));
                             }
                         }

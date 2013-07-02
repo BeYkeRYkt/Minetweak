@@ -30,8 +30,8 @@ public class GenLayerVoronoiZoom extends GenLayer
 
         for (int var15 = 0; var15 < var10 - 1; ++var15)
         {
-            var16 = var11[0 + (var15 + 0) * var9];
-            int var17 = var11[0 + (var15 + 1) * var9];
+            var16 = var11[(var9 * (var15))];
+            int var17 = var11[((var15 + 1) * var9)];
 
             for (int var18 = 0; var18 < var9 - 1; ++var18)
             {
@@ -48,7 +48,7 @@ public class GenLayerVoronoiZoom extends GenLayer
                 this.initChunkSeed((long)(var18 + var7 + 1 << var5), (long)(var15 + var8 + 1 << var5));
                 double var33 = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * var19 + (double)var6;
                 double var35 = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * var19 + (double)var6;
-                int var37 = var11[var18 + 1 + (var15 + 0) * var9];
+                int var37 = var11[var18 + 1 + (var15) * var9];
                 int var38 = var11[var18 + 1 + (var15 + 1) * var9];
 
                 for (int var39 = 0; var39 < var6; ++var39)
