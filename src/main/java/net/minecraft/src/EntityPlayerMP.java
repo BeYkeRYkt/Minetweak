@@ -1,15 +1,13 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+import org.minetweak.Minetweak;
+import org.minetweak.event.player.PlayerDeathEvent;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import net.minecraft.server.MinecraftServer;
+import java.util.*;
 
 public class EntityPlayerMP extends EntityPlayer implements ICrafting
 {
@@ -313,6 +311,8 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
         {
             var6.addToPlayerScore(this, this.scoreValue);
         }
+
+        Minetweak.getEventBus().post(new PlayerDeathEvent(this.getEntityName(), this.mcServer.isHardcore()));
     }
 
     /**
