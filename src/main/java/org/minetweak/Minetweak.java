@@ -202,7 +202,7 @@ public class Minetweak {
     }
 
     /**
-     *
+     * Check whether a player is online
      * @param playerUsername The players username
      * @return if the player is online
      */

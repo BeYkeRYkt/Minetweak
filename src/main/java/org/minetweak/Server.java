@@ -52,12 +52,11 @@ public class Server {
     }
 
     public static void handleCommand(EntityPlayerMP player, String command) {
-        if (command.startsWith("/"))
-        {
-            command = command.substring(1);
-        } else {
+        if (!command.startsWith("/")) {
             return;
         }
+
+        command = command.substring(1);
 
         String[] commandWithArgs = command.split(" ");
         String commandOnly = commandWithArgs[0];

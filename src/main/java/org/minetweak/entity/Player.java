@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  * This class represents the player, and allows you to
- * call many API methods that are burried deep in
+ * call many API methods that are buried deep in
  * vanilla code. It extends CommandSender, which allows
  * the player to send commands. It also retrieves the
  * EntityPlayerMP and NetServerHandler for the player
