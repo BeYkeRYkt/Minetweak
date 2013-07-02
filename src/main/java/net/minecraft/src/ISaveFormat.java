@@ -9,9 +9,9 @@ public interface ISaveFormat
 
     void flushCache();
 
-    /**
-     * @args: Takes one argument - the name of the directory of the world to delete. @desc: Delete the world by deleting
-     * the associated directory recursively.
+    /*
+     * delete the associated directory recursively.
+     * @param var1 name of directory to delete
      */
     boolean deleteWorldDirectory(String var1);
 

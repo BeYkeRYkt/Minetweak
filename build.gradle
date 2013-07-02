@@ -1,4 +1,7 @@
 apply plugin: 'java'
+apply plugin: 'project-report'
+
+def version = '0.0.4'
 
 repositories {
     mavenCentral()

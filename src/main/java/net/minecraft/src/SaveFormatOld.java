@@ -74,7 +74,7 @@ public class SaveFormatOld implements ISaveFormat
     }
 
     /**
-     * @args: Takes one argument - the name of the directory of the world to delete. @desc: Delete the world by deleting
+     * @param par1Str the name of the directory of the world to delete
      * the associated directory recursively.
      */
     public boolean deleteWorldDirectory(String par1Str)
@@ -106,9 +106,9 @@ public class SaveFormatOld implements ISaveFormat
                     {
                         Thread.sleep(500L);
                     }
-                    catch (InterruptedException var5)
+                    catch (InterruptedException ignored)
                     {
-                        ;
+
                     }
                 }
             }
@@ -118,24 +118,20 @@ public class SaveFormatOld implements ISaveFormat
     }
 
     /**
-     * @args: Takes one argument - the list of files and directories to delete. @desc: Deletes the files and directory
+     * @param par0ArrayOfFile the list of files and directories to delete
      * listed in the list recursively.
      */
     protected static boolean deleteFiles(File[] par0ArrayOfFile)
     {
-        for (int var1 = 0; var1 < par0ArrayOfFile.length; ++var1)
-        {
-            File var2 = par0ArrayOfFile[var1];
+        for (File var2 : par0ArrayOfFile) {
             System.out.println("Deleting " + var2);
 
-            if (var2.isDirectory() && !deleteFiles(var2.listFiles()))
-            {
+            if (var2.isDirectory() && !deleteFiles(var2.listFiles())) {
                 System.out.println("Couldn\'t delete directory " + var2);
                 return false;
             }
 
-            if (!var2.delete())
-            {
+            if (!var2.delete()) {
                 System.out.println("Couldn\'t delete file " + var2);
                 return false;
             }
