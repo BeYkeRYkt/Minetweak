@@ -7,6 +7,7 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import org.minetweak.command.*;
 import org.minetweak.entity.Player;
+import org.minetweak.load.StartupThread;
 import org.minetweak.plugins.PluginLoader;
 import org.minetweak.recipe.RecipeManager;
 
@@ -64,24 +65,11 @@ public class Minetweak {
     public static void main(String[] args) {
         System.out.println("Success is very tasty.");
         System.out.println("Minetweak v" + getServerVersion() + " using Minecraft v" + getMinecraftVersion());
-
-        registerCommand("help", new CommandHelp());
-        registerCommand("stop", new CommandStop());
-        registerCommand("kick", new CommandKick());
-        registerCommand("op", new CommandOp());
-        registerCommand("deop", new CommandDeop());
-        registerCommand("kill", new CommandKill());
-        registerCommand("players", new CommandListPlayers());
-        registerListener(RecipeManager.getInstance());
-
-        PluginLoader.initialize();
-
-        ramCheck();
-
+        new StartupThread().start();
         MinecraftServer.main(args);
     }
 
-    private static void ramCheck() {
+    public static void ramCheck() {
         if (Runtime.getRuntime().maxMemory() / 1024L / 1024L < 512L) {
             System.out.println("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar minecraft_server.jar\"");
         } else {

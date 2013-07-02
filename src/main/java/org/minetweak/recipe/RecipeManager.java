@@ -1,9 +1,7 @@
 package org.minetweak.recipe;
 
 import com.google.common.eventbus.Subscribe;
-import net.minecraft.src.Block;
 import net.minecraft.src.CraftingManager;
-import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import org.minetweak.event.server.CraftingReadyEvent;
 
@@ -19,13 +17,12 @@ public class RecipeManager {
         craftingManager.addRecipe(output, data);
     }
 
-    public void addShapelessRecipe(ItemStack output, ItemStack... inputs) {
+    public void addShapelessRecipe(ItemStack output, Object... inputs) {
         craftingManager.addShapelessRecipe(output, inputs);
     }
 
     @Subscribe
     public void craftingReadyCallback(CraftingReadyEvent event) {
         this.craftingManager = event.getCraftingManager();
-        addShapelessRecipe(new ItemStack(Item.appleRed, 1), new ItemStack(Block.ice, 1));
     }
 }
