@@ -5,11 +5,18 @@ def credentials = [
         password: System.getProperty('minetweak.deploy.password')
 ]
 
+signing {
+    required { System.getenv()['isRelease']=='true' }
+    sign configurations.archives
+}
+
 uploadArchives {
     repositories.mavenDeployer {
-        //beforeDeployment { deployment ->
-        //    signing.signPom(deployment)
-        //}
+        if (System.getenv()['isRelease']=='true') {
+            beforeDeployment { deployment ->
+                signing.signPom(deployment)
+            }
+        }
         repository(url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2', authentication: credentials)
 
         snapshotRepository(url: 'https://oss.sonatype.org/content/repositories/snapshots', authentication: credentials)
@@ -41,6 +48,25 @@ uploadArchives {
                         name 'GNU Lesser General Public License (LGPL), Version 3'
                         url 'http://www.gnu.org/licenses/lgpl.txt'
                         distribution 'repo'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'logangorence'
+                        name 'Logan Gorence'
+                        roles {
+                            role 'Project Leader'
+                            role 'Developer'
+                        }
+                    }
+
+                    developer {
+                        id 'kaendfinger'
+                        name 'Kenneth Endfinger'
+                        roles {
+                            role 'Packager'
+                            role 'Developer'
+                        }
                     }
                 }
             }
