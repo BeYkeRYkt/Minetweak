@@ -20,8 +20,8 @@ ext.version = '0.7.0'
 ext.tweakVersion = "${ext.version}-SNAPSHOT"
 ext.mainClass = 'org.minetweak.Start'
 
-sourceCompatibility = '1.6'
-targetCompatibility = '1.6'
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
 
 repositories {
     mavenCentral()
@@ -33,7 +33,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'commons-io:commons-io:2.4'
     compile 'org.apache.commons:commons-lang3:3.1'
-    compile 'org.codehaus.groovy:groovy-all:2.1.9'
+    compile 'org.codehaus.groovy:groovy-all:2.2.1'
     compile 'org.bouncycastle:bcprov-jdk15on:1.49'
     compile 'commons-codec:commons-codec:1.8'
     testCompile 'junit:junit:4.11'
@@ -53,7 +53,7 @@ compileGroovy {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = "1.9"
+    gradleVersion = "1.10"
 }
 
 apply from: 'gradle/ci.gradle'
